@@ -19,6 +19,9 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
+    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
+    implementation("mysql:mysql-connector-java")
+    implementation("dev.miku:r2dbc-mysql")
 }
 
 tasks.withType<KotlinCompile> {
