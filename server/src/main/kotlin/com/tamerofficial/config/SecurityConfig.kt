@@ -18,7 +18,7 @@ class SecurityConfig {
             .authorizeExchange()
             .pathMatchers(HttpMethod.POST, "/employees/update")
             .hasRole("ADMIN")
-            .pathMatchers("/hello")
+            .pathMatchers("/**") // 임시로 다 풀어둠
             .permitAll()
             .pathMatchers("/actuator/**")
             .permitAll()

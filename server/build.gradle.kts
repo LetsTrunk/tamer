@@ -16,6 +16,9 @@ repositories {
     mavenCentral()
 }
 
+val kotestVersion = "4.3.2"
+val mockkVersion = "1.10.0"
+
 dependencies {
     implementation(project(":core"))
     implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
@@ -44,6 +47,12 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.springframework.security:spring-security-test")
+    // Kotest
+    testImplementation("io.kotest:kotest-assertions-core:${kotestVersion}")
+    testImplementation("io.kotest:kotest-runner-junit5:${kotestVersion}")
+    testImplementation("io.kotest:kotest-extensions-spring:${kotestVersion}")
+
+    testImplementation("io.mockk:mockk:${mockkVersion}")
 }
 
 tasks.withType<KotlinCompile> {
