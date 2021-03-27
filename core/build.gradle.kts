@@ -1,46 +1,14 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
-plugins {
-    id("org.springframework.boot") version "2.4.4"
-    id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    kotlin("jvm") version "1.4.31"
-    kotlin("plugin.spring") version "1.4.31"
-}
-
-
 group = "com.tamerofficial"
 version = "1.0-SNAPSHOT"
 
-repositories {
-    mavenCentral()
-    jcenter()
-}
-
 dependencies {
-    implementation(kotlin("stdlib"))
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-
     implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
     implementation("mysql:mysql-connector-java")
     implementation("dev.miku:r2dbc-mysql")
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "1.8"
-    }
-}
-
-tasks.withType<Test> {
-    useJUnitPlatform()
-}
-
-val jar: Jar by tasks
-jar.enabled = true
 val bootJar: BootJar by tasks
 bootJar.enabled = false

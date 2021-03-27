@@ -1,15 +1,14 @@
-package com.tamerofficial.domain.home
+package com.tamerofficial.domain.home.dto
 
 import com.tamerofficial.entity.Comment
-import com.tamerofficial.entity.MapData
 import com.tamerofficial.entity.Review
 
-data class Place(
+data class NearByPlace(
     val placeId : Long,
     val name : String,
     val desc : String,
     val mainPicUrl : String,
-    val mapData: MapData,
+    val location: Location,
     val reviews : List<Review>,
     val comments : List<Comment>
 )

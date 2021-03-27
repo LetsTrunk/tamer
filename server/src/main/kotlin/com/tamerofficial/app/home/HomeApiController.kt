@@ -1,7 +1,7 @@
 package com.tamerofficial.app.home
 
 import com.tamerofficial.common.ResponseEntity
-import com.tamerofficial.domain.home.Place
+import com.tamerofficial.domain.home.dto.NearByPlace
 import kotlinx.coroutines.reactive.awaitFirst
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -13,11 +13,11 @@ import reactor.core.publisher.Flux
 class HomeApiController {
 
     @GetMapping
-    suspend fun listNearByMe() : ResponseEntity<List<Place>> {
+    suspend fun listNearByMe() : ResponseEntity<List<NearByPlace>> {
         return ResponseEntity(
             "200",
             "Success",
-            Flux.fromIterable(emptyList<Place>())
+            Flux.fromIterable(emptyList<NearByPlace>())
                 .collectList()
                 .awaitFirst()
         )
