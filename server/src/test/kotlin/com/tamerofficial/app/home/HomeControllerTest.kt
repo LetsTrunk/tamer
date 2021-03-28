@@ -48,7 +48,7 @@ class HomeControllerTest : FunSpec(){
             ).asFlow()
 
         val result = webClient.post()
-            .uri("/home")
+            .uri("/home/nearby-me")
             .contentType(MediaType.APPLICATION_JSON)
             .body(BodyInserters.fromValue("{\"lat\": 1,\"lon\":2}"))
             .exchange()
