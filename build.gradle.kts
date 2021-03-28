@@ -31,8 +31,10 @@ allprojects{
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-
-        testImplementation("org.springframework.boot:spring-boot-starter-test")
+        testImplementation("com.ninja-squad:springmockk:3.0.1")
+        testImplementation("org.springframework.boot:spring-boot-starter-test") {
+            exclude(module = "mockito-core")
+        }
         testImplementation("io.projectreactor:reactor-test")
         testImplementation("org.springframework.security:spring-security-test")
         // Kotest
@@ -41,7 +43,11 @@ allprojects{
         testImplementation("io.kotest:kotest-extensions-spring:${kotestVersion}")
 
         testImplementation("io.mockk:mockk:${mockkVersion}")
+
+
     }
+
+
 
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         kotlinOptions {

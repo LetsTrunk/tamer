@@ -15,10 +15,11 @@ class HomeApiController(private val home:Home) {
 
     @GetMapping
     suspend fun listNearByMe() : ResponseEntity<List<NearByPlace>> {
+        val results = home.listNearByPlace(Location(1,2)).toList()
         return ResponseEntity(
             "200",
             "Success",
-            home.listNearByPlace(Location(1,2)).toList()
+            results
         )
     }
 }
