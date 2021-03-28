@@ -1,6 +1,24 @@
+profile: prod
+
 server:
   port: 10001
+
+info:
+  name: ${spring.application.name}
+  description: Tamer
+  enviroment: ${spring.profiles.active}
+  version: 0.0.1
 
 logging:
   level:
     root: info
+    org.springframework.data.r2dbc: DEBUG
+
+spring:
+  output:
+    ansi:
+      enabled: ALWAYS
+  r2dbc:
+    url: r2dbc:mysql://localhost:3306/tamer?useSSL=false&characterEncoding=utf8
+    username: tamer
+    password: tamer12@@

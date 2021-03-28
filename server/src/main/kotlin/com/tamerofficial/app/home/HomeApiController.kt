@@ -1,21 +1,23 @@
 package com.tamerofficial.app.home
 
+import com.tamerofficial.common.Log
 import com.tamerofficial.common.ResponseEntity
 import com.tamerofficial.domain.home.Home
 import com.tamerofficial.domain.home.dto.Location
 import com.tamerofficial.domain.home.dto.NearByPlace
 import kotlinx.coroutines.flow.toList
-import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RequestMapping("/home")
 @RestController
 class HomeApiController(private val home:Home) {
-
-    @GetMapping
-    suspend fun listNearByMe() : ResponseEntity<List<NearByPlace>> {
-        val results = home.listNearByPlace(Location(1,2)).toList()
+    companion object : Log
+    @PostMapping
+    suspend fun listNearByMe(@RequestBody location:Location) : ResponseEntity<List<NearByPlace>> {
+        val results = home.listNearByPlace(location).toList()
         return ResponseEntity(
             "200",
             "Success",

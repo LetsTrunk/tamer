@@ -31,6 +31,7 @@ allprojects{
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+        implementation ("io.github.microutils:kotlin-logging-jvm:2.0.2")
         testImplementation("com.ninja-squad:springmockk:3.0.1")
         testImplementation("org.springframework.boot:spring-boot-starter-test") {
             exclude(module = "mockito-core")

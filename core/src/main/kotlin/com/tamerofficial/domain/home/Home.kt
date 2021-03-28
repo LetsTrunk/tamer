@@ -1,5 +1,6 @@
 package com.tamerofficial.domain.home
 
+import com.tamerofficial.common.Log
 import com.tamerofficial.domain.home.dto.Location
 import com.tamerofficial.domain.home.dto.NearByPlace
 import com.tamerofficial.domain.home.dto.RecommendKnowHow
@@ -15,7 +16,9 @@ interface Home {
 
 @Component
 class HomeApp : Home{
+    companion object : Log
     override suspend fun listNearByPlace(currentLocation : Location) : Flow<NearByPlace>{
+        logger.info(currentLocation.toString())
         return listOf(
             NearByPlace(
                 1,
