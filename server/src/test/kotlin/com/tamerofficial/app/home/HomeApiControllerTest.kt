@@ -23,7 +23,7 @@ import org.springframework.web.reactive.function.BodyInserters
 @ExtendWith(SpringExtension::class)
 @WebFluxTest(HomeApiController::class)
 @Import(SecurityConfig::class)
-class HomeControllerTest : FunSpec(){
+class HomeApiControllerTest : FunSpec(){
 
     @MockkBean
     private lateinit var homeApp: Home

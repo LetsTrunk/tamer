@@ -16,6 +16,7 @@ class HomeApiController(private val home:Home) {
 
     @PostMapping("nearby-me")
     suspend fun listNearByMe(@RequestBody location:Location) : ResponseEntity<List<NearByPlace>> {
+        logger.debug("[Home Ctrl] location is lat : ${location.lat} , lon : ${location.lon}")
         val results = home.listNearByPlace(location).toList()
         return ResponseEntity(
             "200",
