@@ -4,7 +4,7 @@ import com.ninjasquad.springmockk.MockkBean
 import com.tamerofficial.common.ResponseEntity
 import com.tamerofficial.config.SecurityConfig
 import com.tamerofficial.domain.home.Home
-import com.tamerofficial.domain.home.dto.Location
+import com.tamerofficial.domain.common.Location
 import com.tamerofficial.domain.home.dto.NearByPlace
 import io.kotest.core.spec.style.FunSpec
 import io.mockk.coEvery

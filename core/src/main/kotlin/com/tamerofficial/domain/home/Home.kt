@@ -1,7 +1,7 @@
 package com.tamerofficial.domain.home
 
 import com.tamerofficial.common.Log
-import com.tamerofficial.domain.home.dto.Location
+import com.tamerofficial.domain.common.Location
 import com.tamerofficial.domain.home.dto.NearByPlace
 import com.tamerofficial.domain.home.dto.RecommendKnowHow
 import kotlinx.coroutines.flow.Flow
