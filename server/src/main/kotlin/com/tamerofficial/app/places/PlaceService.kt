@@ -28,7 +28,8 @@ class PlaceService(
      * 위치, 지역 기반 검색 조건을 갖고, 검색 수행한다.
      */
     suspend fun listPlaces(searchCriteria: PlaceSearchCriteria) : Flow<Places> {
-
+        // db 에서 조회 하는 쿼리 만들기
+        // 검색 조건에 따라서 테이블 정규화 고민하기
         return emptyFlow()
     }
 }
