@@ -1,6 +1,8 @@
 package com.tamerofficial.app.places
 
 
+import com.tamerofficial.app.places.dto.AreaBaseSearchCondition
+import com.tamerofficial.app.places.dto.LocationBaseSearchCondition
 import com.tamerofficial.app.places.dto.PlaceSearchConditions
 import com.tamerofficial.common.Log
 import com.tamerofficial.common.ResponseEntity
@@ -22,10 +24,14 @@ class PlacesApiController(
     ) {
     companion object : Log
 
+    /**
+     * R2DBC 테스팅
+     */
     @GetMapping("/test")
     suspend fun test() : FilterAttributeEntity {
         return filterRepository.save(FilterAttributeEntity(name = "test")).awaitSingle()
     }
+
     /**
      * 처음페이지 로딩할때 초기 데이터 한번에 주기 위한 용도
      */
@@ -41,21 +47,34 @@ class PlacesApiController(
     suspend fun listFilters() : ResponseEntity<List<FilterAttribute>>{
         return ResponseEntity(SuccessStatus.statusCode, SuccessStatus.statusMessage, emptyList())
     }
+
     /**
      * 선택된 지역단위 장소 목록을 주기 위함
      *
      */
-    @GetMapping("list/places/{areaId}")
+    @GetMapping("/list/{areaId}")
     suspend fun listPlacesByArea(@PathVariable("areaId") areaId: Long) : ResponseEntity<List<Place>> {
         return ResponseEntity("","", emptyList())
     }
 
     /**
      * 선택된 지역 별로 검색 조건에 맞는 장소 목록을 주기 위함
+     * 검색 조건 : 지역 기준 (area(single), subArea(multi))
+     * 공통 조건 : 정렬
      */
-    @PostMapping("list/places")
-    suspend fun listPlacesByConditions(@RequestBody placeSearchCondition: PlaceSearchConditions) : ResponseEntity<List<Place>> {
-        return ResponseEntity(TK_PL_00100,"요청 정상 수신", emptyList())
+    @PostMapping("/list/filteredBy/area")
+    suspend fun listPlacesByFilteredBy(@RequestBody areaBaseSearchCondition: AreaBaseSearchCondition) : ResponseEntity<List<Place>>{
+        return ResponseEntity(SuccessStatus.statusCode,SuccessStatus.statusMessage)
+    }
+
+    /**
+     * 현재 위치 별로 검색 조건에 맞는 장소 목록을 주기 위함
+     * 검색 조건 : 현재 위치 반경 기준
+     * 공통 조건 : 정렬
+     */
+    @PostMapping("/list/filteredBy/location")
+    suspend fun listPlacesByFilteredBy(@RequestBody locationBaseSearchCondition: LocationBaseSearchCondition) : ResponseEntity<List<Place>>{
+        return ResponseEntity(SuccessStatus.statusCode,SuccessStatus.statusMessage)
     }
 
     /**

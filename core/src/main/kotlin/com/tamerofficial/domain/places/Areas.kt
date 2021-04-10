@@ -16,10 +16,10 @@ class AreasApp : Areas{
     override suspend fun listAreas(): Flow<Area> {
         return listOf(
             Area(name="서울특별시",areaCode="SEOUL",areaId=1L
-                , emptyList()
+                , subAreas = emptyList()
             ),
-            Area(name="경기도",areaCode="KYUNGKI",areaId=2L, emptyList()),
-            Area(name="강원도",areaCode="KANGYON",areaId=3L, emptyList())
+            Area(name="경기도",areaCode="KYUNGKI",areaId=2L, subAreas = emptyList()),
+            Area(name="강원도",areaCode="KANGYON",areaId=3L, subAreas = emptyList())
         ).asFlow()
     }
 }

@@ -1,9 +1,9 @@
 package com.tamerofficial.domain.places
 
 data class Area(
+    val areaId: Long,
     val name: String,
     val areaCode: String,
-    val areaId: Long,
     val subAreas: List<SubArea>
 )
 

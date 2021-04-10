@@ -4,24 +4,26 @@ import com.tamerofficial.domain.common.Location
 import com.tamerofficial.domain.common.Review
 
 data class Place(
+    val placeId: Long, // PK
     val name: String,
-    val placeId: Long,
-    val areaId: Long,
+    val area: Area, //도, 특별시
+    val subArea: SubArea, //시 군 구
     val location: Location,
-    val address1: String,
-    val address2: String,
-
-    val score: Score,
-
-    val imageUrls : List<String>,
-
+    val distanceFrom : Long, // 현재 위치 부터 거리
+    val address: Address, // 주소 정보
+    val score: Score, // 평점 (트렁트, 사용자)
+    val imageUrls : List<String>, //max 5개
     val isPicked: Boolean,// 인증장소 여부
     val reviewOverViews : List<OverviewAttribute>, // 리뷰 속성
-
     val filterAttributes: FilterAttribute, // 필터 속성
-
     val reviews : List<Review>
 )
+
+data class Address(
+    val address1: String,
+    val address2: String
+)
+
 data class Score(
     val trunkScore : Long, //트렁크 평점
     val userScore : Long, //사용자 평점
