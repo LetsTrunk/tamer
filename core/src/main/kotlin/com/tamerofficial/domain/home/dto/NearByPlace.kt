@@ -1,8 +1,8 @@
 package com.tamerofficial.domain.home.dto
 
 import com.tamerofficial.domain.common.Location
-import com.tamerofficial.entity.Comment
-import com.tamerofficial.entity.Review
+import com.tamerofficial.domain.common.Comment
+import com.tamerofficial.domain.common.Review
 
 data class NearByPlace(
     val placeId : Long,

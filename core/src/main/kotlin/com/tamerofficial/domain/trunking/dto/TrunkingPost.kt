@@ -1,6 +1,6 @@
 package com.tamerofficial.domain.trunking.dto
 
-import com.tamerofficial.entity.Comment
+import com.tamerofficial.domain.common.Comment
 
 data class TrunkingPost(
     val category: PostCategory,
