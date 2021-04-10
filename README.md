@@ -1,9 +1,9 @@
 # Tamer
 
 # mysql setting
-
+# --platform linux/amd64 : only m1 mac
 - docker pull mysql
-- docker run --name tamer-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=tamer12@@ -d mysql:8
+- docker run  --platform linux/amd64 --name tamer-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=tamer12@@ -d mysql:8
 
 # connect to mysql docker container and setting db env
 
