@@ -1,5 +1,6 @@
 package com.tamerofficial.app.places
 
+
 import com.tamerofficial.app.places.dto.PlaceSearchConditions
 import com.tamerofficial.common.Log
 import com.tamerofficial.common.ResponseEntity
@@ -9,11 +10,9 @@ import com.tamerofficial.domain.places.FilterAttribute
 import com.tamerofficial.domain.places.Place
 import com.tamerofficial.domain.places.infra.FilterAttributeEntity
 import com.tamerofficial.domain.places.infra.FilterAttributesRepository
-import org.springframework.transaction.annotation.Transactional
+import kotlinx.coroutines.reactive.awaitSingle
 import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Mono
-import java.time.LocalDateTime
-import java.util.*
 
 @RequestMapping("/places")
 @RestController
@@ -23,10 +22,9 @@ class PlacesApiController(
     ) {
     companion object : Log
 
-    @Transactional
     @GetMapping("/test")
-    suspend fun test() : Mono<FilterAttributeEntity> {
-        return filterRepository.save(FilterAttributeEntity(name = "test"))
+    suspend fun test() : FilterAttributeEntity {
+        return filterRepository.save(FilterAttributeEntity(name = "test")).awaitSingle()
     }
     /**
      * 처음페이지 로딩할때 초기 데이터 한번에 주기 위한 용도
