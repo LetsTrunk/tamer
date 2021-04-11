@@ -10,6 +10,7 @@ import com.tamerofficial.domain.places.FilterAttribute
 import com.tamerofficial.domain.places.Place
 import com.tamerofficial.domain.places.infra.FilterAttributesRepository
 import com.tamerofficial.domain.places.infra.PlacesProjectionRepository
+import com.tamerofficial.domain.places.infra.PlacesView
 import com.tamerofficial.domain.places.infra.entity.FilterAttributeEntity
 import com.tamerofficial.domain.places.infra.entity.PlacesEntity
 import kotlinx.coroutines.reactive.awaitSingle
@@ -33,7 +34,7 @@ class PlacesApiController(
     }
 
     @GetMapping("/test2")
-    suspend fun test2() : PlacesEntity {
+    suspend fun test2() : PlacesView {
         return placesProjectionRepository.findAll().awaitSingle()
     }
 

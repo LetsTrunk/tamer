@@ -16,6 +16,13 @@ CREATE TABLE places(
     updatedAt DATETIME NOT NULL DEFAULT NOW(),
     PRIMARY KEY (place_id)
 )
+CREATE TABLE areas(
+    area_id BIGINT NOT NULL AUTO_INCREMENT,
+    area_name VARCHAR(100),
+    subarea_id BIGINT NOT NULL,
+    subarea_name VARCHAR(100),
+    PRIMARY KEY (area_id)
+)
 
 CREATE TABLE place_images(
     place_image_id BIGINT NOT NULL AUTO_INCREMENT,
