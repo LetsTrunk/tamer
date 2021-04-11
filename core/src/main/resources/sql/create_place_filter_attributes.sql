@@ -16,13 +16,16 @@ CREATE TABLE places(
     updatedAt DATETIME NOT NULL DEFAULT NOW(),
     PRIMARY KEY (place_id)
 )
+
+#지역 정보 - 계층구조
 CREATE TABLE areas(
     area_id BIGINT NOT NULL AUTO_INCREMENT,
+    parent_area_id BIGINT,
     area_name VARCHAR(100),
-    subarea_id BIGINT NOT NULL,
-    subarea_name VARCHAR(100),
     PRIMARY KEY (area_id)
 )
+
+INSERT INTO areas(area_name)
 
 CREATE TABLE place_images(
     place_image_id BIGINT NOT NULL AUTO_INCREMENT,

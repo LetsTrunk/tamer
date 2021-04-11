@@ -12,8 +12,11 @@ import java.time.LocalDateTime
 
 @Repository
 interface PlacesProjectionRepository : ReactiveCrudRepository<PlacesView,Long>{
-    @Query("SELECT place_id, place_name, place_desc, latitude, longitude, address1, address2, p.area_id, area_name, p.subarea_id, subarea_name, createdAt, updatedAt" +
-            " FROM places p INNER JOIN areas a ON p.area_id=a.area_id AND p.subarea_id = a.subarea_id")
+    @Query("SELECT place_id, place_name, place_desc, latitude, longitude, address1, address2, " +
+            "a.area_id as area_id, a.area_name as area_name, " +
+            "a2.area_id as subarea_id, a2.area_name as subarea_name, " +
+            "createdAt, updatedAt" +
+            " FROM places p INNER JOIN areas a ON p.area_id = a.area_id INNER JOIN areas a2 ON p.subarea_id = a2.area_id")
     override fun findAll(): Flux<PlacesView>
 }
 
@@ -46,10 +49,10 @@ data class PlacesView(
     val areaName : String,
 
     @Column("subarea_id")
-    val subAreaId : Long = 0,
+    val subareaId : Long = 0,
 
     @Column("subarea_name")
-    val subAreaName : String,
+    val subareaName : String,
 
     @Column("createdAt")
     val createdAt : LocalDateTime?,
