@@ -3,24 +3,24 @@ package com.tamerofficial.app.places
 
 import com.tamerofficial.app.places.dto.AreaBaseSearchCondition
 import com.tamerofficial.app.places.dto.LocationBaseSearchCondition
-import com.tamerofficial.app.places.dto.PlaceSearchConditions
 import com.tamerofficial.common.Log
 import com.tamerofficial.common.ResponseEntity
-import com.tamerofficial.common.StatusCode.TK_PL_00100
 import com.tamerofficial.common.SuccessStatus
 import com.tamerofficial.domain.places.FilterAttribute
 import com.tamerofficial.domain.places.Place
-import com.tamerofficial.domain.places.infra.FilterAttributeEntity
 import com.tamerofficial.domain.places.infra.FilterAttributesRepository
+import com.tamerofficial.domain.places.infra.PlacesProjectionRepository
+import com.tamerofficial.domain.places.infra.entity.FilterAttributeEntity
+import com.tamerofficial.domain.places.infra.entity.PlacesEntity
 import kotlinx.coroutines.reactive.awaitSingle
 import org.springframework.web.bind.annotation.*
-import reactor.core.publisher.Mono
 
 @RequestMapping("/places")
 @RestController
 class PlacesApiController(
     private val placeService: PlaceService,
-    private val filterRepository: FilterAttributesRepository
+    private val filterRepository: FilterAttributesRepository,
+    private val placesProjectionRepository: PlacesProjectionRepository
     ) {
     companion object : Log
 
@@ -30,6 +30,11 @@ class PlacesApiController(
     @GetMapping("/test")
     suspend fun test() : FilterAttributeEntity {
         return filterRepository.save(FilterAttributeEntity(name = "test")).awaitSingle()
+    }
+
+    @GetMapping("/test2")
+    suspend fun test2() : PlacesEntity {
+        return placesProjectionRepository.findAll().awaitSingle()
     }
 
     /**

@@ -14,7 +14,7 @@ data class Place(
     val score: Score, // 평점 (트렁트, 사용자)
     val imageUrls : List<String>, //max 5개
     val isPicked: Boolean,// 인증장소 여부
-    val reviewOverViews : List<OverviewAttribute>, // 리뷰 속성
+    val reviewAttribute: List<ReviewAttribute>, // 리뷰 속성
     val filterAttributes: FilterAttribute, // 필터 속성
     val reviews : List<Review>
 )
@@ -28,7 +28,8 @@ data class Score(
     val trunkScore : Long, //트렁크 평점
     val userScore : Long, //사용자 평점
 )
-data class OverviewAttribute(
+
+data class ReviewAttribute(
     val isTrunk : Boolean = false,
     val levelScore: Long,
     val facilitiesScore : Long,
