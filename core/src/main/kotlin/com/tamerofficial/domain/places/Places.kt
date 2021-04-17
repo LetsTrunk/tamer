@@ -1,6 +1,7 @@
 package com.tamerofficial.domain.places
 
 import com.tamerofficial.domain.common.Location
+import com.tamerofficial.domain.places.infra.ScoreAttributeRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.emptyFlow
@@ -12,7 +13,7 @@ interface Places {
 }
 
 @Component
-class PlacesApp : Places{
+class PlacesApp(scoreRepo : ScoreAttributeRepository) : Places{
 
     /**
      * Param : Area

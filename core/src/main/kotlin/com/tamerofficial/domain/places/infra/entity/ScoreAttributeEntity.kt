@@ -10,6 +10,9 @@ class ScoreAttributeEntity (
     @Column("score_filter_attr_id")
     val scoreAttrId : Long? = null,
 
+    @Column("place_id")
+    val placeId: Long? = null,
+
     @Column("is_trunk")
     val isTrunk : Boolean = false,
     @Column("level_score")
@@ -24,6 +27,4 @@ class ScoreAttributeEntity (
     val roughnessScore : Long = 0,
     @Column("crowding_score")
     val crowdingScore : Long = 0
-){
-
-}
+)

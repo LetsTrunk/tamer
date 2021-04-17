@@ -11,9 +11,17 @@ import com.tamerofficial.domain.places.Place
 import com.tamerofficial.domain.places.infra.FilterAttributesRepository
 import com.tamerofficial.domain.places.infra.PlacesProjectionRepository
 import com.tamerofficial.domain.places.infra.PlacesView
+import com.tamerofficial.domain.places.infra.ScoreAttributeRepository
 import com.tamerofficial.domain.places.infra.entity.FilterAttributeEntity
 import com.tamerofficial.domain.places.infra.entity.PlacesEntity
+import com.tamerofficial.domain.places.infra.entity.ScoreAttributeEntity
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactive.awaitSingle
+import kotlinx.coroutines.reactive.collect
 import org.springframework.web.bind.annotation.*
 
 @RequestMapping("/places")
@@ -21,7 +29,8 @@ import org.springframework.web.bind.annotation.*
 class PlacesApiController(
     private val placeService: PlaceService,
     private val filterRepository: FilterAttributesRepository,
-    private val placesProjectionRepository: PlacesProjectionRepository
+    private val placesProjectionRepository: PlacesProjectionRepository,
+    private val scoreAttributeRepository: ScoreAttributeRepository
     ) {
     companion object : Log
 
@@ -76,11 +85,12 @@ class PlacesApiController(
     /**
      * 현재 위치 별로 검색 조건에 맞는 장소 목록을 주기 위함
      * 검색 조건 : 현재 위치 반경 기준
+     * 반경 조회
      * 공통 조건 : 정렬
      */
     @PostMapping("/list/filteredBy/location")
-    suspend fun listPlacesByFilteredBy(@RequestBody locationBaseSearchCondition: LocationBaseSearchCondition) : ResponseEntity<List<Place>>{
-        return ResponseEntity(SuccessStatus.statusCode,SuccessStatus.statusMessage)
+    suspend fun listPlacesByFilteredBy(@RequestBody locationBaseSearchCondition: LocationBaseSearchCondition) : ResponseEntity<List<PlacesView>>{
+        return ResponseEntity(SuccessStatus.statusCode,SuccessStatus.statusMessage,placeService.listPlaceViewBy(locationBaseSearchCondition).toList() )
     }
 
     /**
