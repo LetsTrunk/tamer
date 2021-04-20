@@ -78,8 +78,8 @@ class PlacesApiController(
      * 공통 조건 : 정렬
      */
     @PostMapping("/list/filteredBy/area")
-    suspend fun listPlacesByFilteredBy(@RequestBody areaBaseSearchCondition: AreaBaseSearchCondition) : ResponseEntity<List<Place>>{
-        return ResponseEntity(SuccessStatus.statusCode,SuccessStatus.statusMessage)
+    suspend fun listPlacesByFilteredBy(@RequestBody areaBaseSearchCondition: AreaBaseSearchCondition) : ResponseEntity<List<PlacesView>>{
+        return ResponseEntity(SuccessStatus.statusCode,SuccessStatus.statusMessage, placeService.listPlaceViewBy(areaBaseSearchCondition).toList())
     }
 
     /**
