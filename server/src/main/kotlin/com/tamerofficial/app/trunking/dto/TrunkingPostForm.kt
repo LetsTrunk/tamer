@@ -1,6 +1,6 @@
 package com.tamerofficial.app.trunking.dto
 
-import com.tamerofficial.domain.trunking.dto.PostCategory
+import com.tamerofficial.trunking.dto.PostCategory
 
 data class TrunkingPostForm(
     val postCategory: PostCategory,

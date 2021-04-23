@@ -6,22 +6,15 @@ import com.tamerofficial.app.places.dto.LocationBaseSearchCondition
 import com.tamerofficial.common.Log
 import com.tamerofficial.common.ResponseEntity
 import com.tamerofficial.common.SuccessStatus
-import com.tamerofficial.domain.places.FilterAttribute
-import com.tamerofficial.domain.places.Place
-import com.tamerofficial.domain.places.infra.FilterAttributesRepository
-import com.tamerofficial.domain.places.infra.PlacesProjectionRepository
-import com.tamerofficial.domain.places.infra.PlacesView
-import com.tamerofficial.domain.places.infra.ScoreAttributeRepository
-import com.tamerofficial.domain.places.infra.entity.FilterAttributeEntity
-import com.tamerofficial.domain.places.infra.entity.PlacesEntity
-import com.tamerofficial.domain.places.infra.entity.ScoreAttributeEntity
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
+import com.tamerofficial.infra.dao.FilterAttributesRepository
+import com.tamerofficial.infra.PlacesProjectionRepository
+import com.tamerofficial.infra.PlacesView
+import com.tamerofficial.infra.ScoreAttributeRepository
+import com.tamerofficial.infra.entity.FilterAttributeEntity
+import com.tamerofficial.place.query.FilterAttribute
+import com.tamerofficial.place.query.PlaceViewDto
 import kotlinx.coroutines.flow.toList
-import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactive.awaitSingle
-import kotlinx.coroutines.reactive.collect
 import org.springframework.web.bind.annotation.*
 
 @RequestMapping("/places")
@@ -48,15 +41,6 @@ class PlacesApiController(
     }
 
     /**
-     * 처음페이지 로딩할때 초기 데이터 한번에 주기 위한 용도
-     */
-    @GetMapping
-    suspend fun placesPage() : ResponseEntity<PlacePage> {
-        val placePage = placeService.placePage()
-        return ResponseEntity("","",placePage)
-    }
-
-    /**
      * 필터 정보를 주기 위함
      */
     suspend fun listFilters() : ResponseEntity<List<FilterAttribute>>{
@@ -68,7 +52,7 @@ class PlacesApiController(
      *
      */
     @GetMapping("/list/{areaId}")
-    suspend fun listPlacesByArea(@PathVariable("areaId") areaId: Long) : ResponseEntity<List<Place>> {
+    suspend fun listPlacesByArea(@PathVariable("areaId") areaId: Long) : ResponseEntity<List<PlaceViewDto>> {
         return ResponseEntity("","", emptyList())
     }
 
@@ -78,7 +62,7 @@ class PlacesApiController(
      * 공통 조건 : 정렬
      */
     @PostMapping("/list/filteredBy/area")
-    suspend fun listPlacesByFilteredBy(@RequestBody areaBaseSearchCondition: AreaBaseSearchCondition) : ResponseEntity<List<PlacesView>>{
+    suspend fun listPlacesByFilteredBy(@RequestBody areaBaseSearchCondition: AreaBaseSearchCondition) : ResponseEntity<List<PlaceViewDto>>{
         return ResponseEntity(SuccessStatus.statusCode,SuccessStatus.statusMessage, placeService.listPlaceViewBy(areaBaseSearchCondition).toList())
     }
 
@@ -89,7 +73,7 @@ class PlacesApiController(
      * 공통 조건 : 정렬
      */
     @PostMapping("/list/filteredBy/location")
-    suspend fun listPlacesByFilteredBy(@RequestBody locationBaseSearchCondition: LocationBaseSearchCondition) : ResponseEntity<List<PlacesView>>{
+    suspend fun listPlacesByFilteredBy(@RequestBody locationBaseSearchCondition: LocationBaseSearchCondition) : ResponseEntity<List<PlaceViewDto>>{
         return ResponseEntity(SuccessStatus.statusCode,SuccessStatus.statusMessage,placeService.listPlaceViewBy(locationBaseSearchCondition).toList() )
     }
 
@@ -98,7 +82,7 @@ class PlacesApiController(
      * param : placeId
      */
     @GetMapping("/detail/{placeId}")
-    suspend fun detailPlaces(@PathVariable("placeId") placeId : Long) : ResponseEntity<Place> {
+    suspend fun detailPlaces(@PathVariable("placeId") placeId : Long) : ResponseEntity<PlaceViewDto> {
         return ResponseEntity("","")
     }
 }

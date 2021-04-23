@@ -2,15 +2,10 @@ package com.tamerofficial.app.places
 
 import com.tamerofficial.app.places.dto.AreaBaseSearchCondition
 import com.tamerofficial.app.places.dto.LocationBaseSearchCondition
-import com.tamerofficial.domain.places.Area
-import com.tamerofficial.domain.places.AreasApp
-import com.tamerofficial.domain.places.Place
-import com.tamerofficial.domain.places.Places
-import com.tamerofficial.domain.places.infra.FilterAttributesRepository
-import com.tamerofficial.domain.places.infra.PlacesProjectionRepository
-import com.tamerofficial.domain.places.infra.PlacesView
-import com.tamerofficial.domain.places.infra.ScoreAttributeRepository
-import kotlinx.coroutines.async
+import com.tamerofficial.infra.dao.FilterAttributesRepository
+import com.tamerofficial.infra.PlacesProjectionRepository
+import com.tamerofficial.infra.ScoreAttributeRepository
+import com.tamerofficial.place.query.PlaceViewDto
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -24,43 +19,30 @@ import org.springframework.stereotype.Service
 
 @Service
 class PlaceService(
-    private val placeApp: Places,
-    private val areasApp: AreasApp,
     private val filterRepository: FilterAttributesRepository,
     private val placesProjectionRepository: PlacesProjectionRepository,
     private val scoreAttributeRepository: ScoreAttributeRepository
     ) {
 
-    suspend fun placePage(): PlacePage = coroutineScope {
-        val areas = async { areasApp.listAreas() }
-        val places = async { placeApp.listPlaces(Area(name="서울특별시",areaCode="SEOUL",areaId=1L, subAreas = emptyList())) }
-        PlacePage(areas.await().toList(), emptyList(), places.await().toList())
-    }
-
-    suspend fun listPlaceViewBy(locationBaseSearchCondition: LocationBaseSearchCondition) : Flow<PlacesView> = coroutineScope {
+    suspend fun listPlaceViewBy(locationBaseSearchCondition: LocationBaseSearchCondition) : Flow<PlaceViewDto> = coroutineScope {
         //반경 목록 갯수, 조회
         return@coroutineScope placesProjectionRepository.findByDistanceIn(locationBaseSearchCondition.distanceFrom!!.distance,0,300).map{
             val result = scoreAttributeRepository.findByPlaceId(it.placeId!!).toList()
             it.scores = it.scores + result
-            it
+            it.toDto()
         }
     }
 
     /**
      * 위치, 지역 기반 검색 조건을 갖고, 검색 수행한다.
      */
-    suspend fun listPlaceViewBy(areaBaseSearchCondition: AreaBaseSearchCondition) : Flow<PlacesView> = coroutineScope {
+    suspend fun listPlaceViewBy(areaBaseSearchCondition: AreaBaseSearchCondition) : Flow<PlaceViewDto> = coroutineScope {
         //반경 목록 갯수, 조회
         return@coroutineScope placesProjectionRepository.findByArea(areaBaseSearchCondition.areaCode!!,0,300).map{
             val result = scoreAttributeRepository.findByPlaceId(it.placeId!!).toList()
             it.scores = it.scores + result
-            it
+            it.toDto()
         }
     }
 }
 
-data class PlacePage(
-    val areas: List<Area>,
-    val banners: List<Any>,
-    val places: List<Place>
-)

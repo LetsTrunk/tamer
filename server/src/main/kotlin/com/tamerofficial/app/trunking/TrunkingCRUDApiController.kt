@@ -3,9 +3,9 @@ package com.tamerofficial.app.trunking
 import com.tamerofficial.app.trunking.dto.TrunkingPostForm
 import com.tamerofficial.common.Log
 import com.tamerofficial.common.ResponseEntity
-import com.tamerofficial.domain.trunking.dto.PostCategory
-import com.tamerofficial.domain.trunking.dto.TrunkingPost
-import com.tamerofficial.domain.trunking.dto.Writer
+import com.tamerofficial.trunking.dto.PostCategory
+import com.tamerofficial.trunking.dto.TrunkingPost
+import com.tamerofficial.trunking.dto.Writer
 import org.springframework.web.bind.annotation.*
 
 @RequestMapping("/trunking/detail")

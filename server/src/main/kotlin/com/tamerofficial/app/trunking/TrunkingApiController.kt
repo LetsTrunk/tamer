@@ -2,9 +2,9 @@ package com.tamerofficial.app.trunking
 
 import com.tamerofficial.common.Log
 import com.tamerofficial.common.ResponseEntity
-import com.tamerofficial.domain.trunking.dto.PostCategory
-import com.tamerofficial.domain.trunking.dto.TrunkingPost
-import com.tamerofficial.domain.trunking.dto.Writer
+import com.tamerofficial.trunking.dto.PostCategory
+import com.tamerofficial.trunking.dto.TrunkingPost
+import com.tamerofficial.trunking.dto.Writer
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping

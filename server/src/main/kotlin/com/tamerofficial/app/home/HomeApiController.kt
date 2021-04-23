@@ -1,11 +1,11 @@
 package com.tamerofficial.app.home
 
+import com.tamerofficial.common.Location
 import com.tamerofficial.common.Log
 import com.tamerofficial.common.ResponseEntity
-import com.tamerofficial.domain.home.Home
-import com.tamerofficial.domain.common.Location
-import com.tamerofficial.domain.home.dto.NearByPlace
-import com.tamerofficial.domain.home.dto.RecommendKnowHow
+import com.tamerofficial.home.Home
+import com.tamerofficial.home.query.dto.NearByPlace
+import com.tamerofficial.home.query.dto.RecommendKnowHow
 import kotlinx.coroutines.flow.toList
 import org.springframework.web.bind.annotation.*
 

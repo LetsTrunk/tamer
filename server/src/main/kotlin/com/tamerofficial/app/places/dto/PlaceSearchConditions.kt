@@ -1,6 +1,7 @@
 package com.tamerofficial.app.places.dto
 
-import com.tamerofficial.domain.common.Location
+import com.tamerofficial.common.Location
+
 
 abstract class PlaceSearchConditions(
     open val sortBy : String

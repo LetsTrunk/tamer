@@ -1,8 +1,0 @@
-package com.tamerofficial.domain.places.infra
-
-import com.tamerofficial.domain.places.infra.entity.FilterAttributeEntity
-import org.springframework.data.repository.reactive.ReactiveCrudRepository
-import org.springframework.stereotype.Repository
-
-@Repository
-interface FilterAttributesRepository  : ReactiveCrudRepository<FilterAttributeEntity, Long>
