@@ -11,10 +11,9 @@ data class PlaceViewDto(
     val location: Location,
     val distanceFrom : Long = 0, // 현재 위치 부터 거리
     val address: Address, // 주소 정보
-    val score: Score? = null, // 평점 (트렁트, 사용자)
     val imageUrls : List<String> = mutableListOf(), //max 5개
-    val reviewAttribute: List<ReviewAttribute> = mutableListOf(), // 리뷰 속성
-    val filterAttributes: FilterAttribute? = null, // 필터 속성
+    val scoreAttribute: ScoreAttribute? = null, // 리뷰 속성
+    val filterAttributes: List<FilterAttribute> = mutableListOf(), // 필터 속성
     val reviews : List<Review> = mutableListOf()
 )
 
@@ -28,7 +27,7 @@ data class Score(
     val userScore : Long, //사용자 평점
 )
 
-data class ReviewAttribute(
+data class ScoreAttribute(
     val isTrunk : Boolean = false,
     val levelScore: Long,
     val facilitiesScore : Long,

@@ -1,11 +1,14 @@
-package com.tamerofficial.infra
+package com.tamerofficial.infra.dao
 
 import com.tamerofficial.infra.entity.ScoreAttributeEntity
 import kotlinx.coroutines.flow.Flow
+import org.springframework.data.r2dbc.repository.Query
 import org.springframework.data.repository.reactive.ReactiveCrudRepository
 import org.springframework.stereotype.Repository
+import reactor.core.publisher.Mono
 
 @Repository
 interface ScoreAttributeRepository : ReactiveCrudRepository<ScoreAttributeEntity, Long>{
-    fun findByPlaceId(placeId:Long) : Flow<ScoreAttributeEntity>
+    @Query("select * from place_score_attributes where place_id = :placeId")
+    fun findByPlaceId(placeId:Long) : Mono<ScoreAttributeEntity>
 }

@@ -1,16 +1,13 @@
 package com.tamerofficial.infra.entity
 
-import kotlinx.coroutines.flow.Flow
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.data.annotation.Id
-import org.springframework.data.annotation.Transient
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
+import java.math.BigDecimal
 import java.time.LocalDateTime
 
-//projection 용 entity로 새로 정의해야 할 듯
 @Table("places")
-data class PlacesEntity(
+data class PlacesListView(
     @Id
     @Column("place_id")
     val placeId: Long? = null,
@@ -24,10 +21,12 @@ data class PlacesEntity(
     val desc : String,
 
     @Column("latitude")
-    val lat : Long,
+    val lat : BigDecimal,
 
     @Column("longitude")
-    val lon : Long,
+    val lon : BigDecimal,
+
+    val distance : Long?,
 
     @Column("address1")
     val address1: String,
@@ -48,11 +47,5 @@ data class PlacesEntity(
     @Column("createdAt")
     val createdAt : LocalDateTime?,
     @Column("updatedAt")
-    val updatedAt : LocalDateTime?,
-
-    @Transient
-    var scoreAttribute : ScoreAttributeEntity,
-    @Transient
-    var placesFilterAttributeList : Flow<FilterAttributeEntity>,
+    val updatedAt : LocalDateTime?
 )
-

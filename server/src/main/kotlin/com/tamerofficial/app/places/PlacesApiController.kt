@@ -7,12 +7,14 @@ import com.tamerofficial.common.Log
 import com.tamerofficial.common.ResponseEntity
 import com.tamerofficial.common.SuccessStatus
 import com.tamerofficial.infra.dao.FilterAttributesRepository
-import com.tamerofficial.infra.PlacesProjectionRepository
-import com.tamerofficial.infra.PlacesView
-import com.tamerofficial.infra.ScoreAttributeRepository
+import com.tamerofficial.infra.dao.PlacesListViewRepository
+import com.tamerofficial.infra.dao.ScoreAttributeRepository
 import com.tamerofficial.infra.entity.FilterAttributeEntity
+import com.tamerofficial.infra.entity.PlacesListView
+import com.tamerofficial.infra.entity.ScoreAttributeEntity
 import com.tamerofficial.place.query.FilterAttribute
 import com.tamerofficial.place.query.PlaceViewDto
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.reactive.awaitSingle
 import org.springframework.web.bind.annotation.*
@@ -22,7 +24,6 @@ import org.springframework.web.bind.annotation.*
 class PlacesApiController(
     private val placeService: PlaceService,
     private val filterRepository: FilterAttributesRepository,
-    private val placesProjectionRepository: PlacesProjectionRepository,
     private val scoreAttributeRepository: ScoreAttributeRepository
     ) {
     companion object : Log
@@ -36,9 +37,11 @@ class PlacesApiController(
     }
 
     @GetMapping("/test2")
-    suspend fun test2() : PlacesView {
-        return placesProjectionRepository.findAll().awaitSingle()
+    suspend fun test2() : ScoreAttributeEntity {
+        return scoreAttributeRepository.findByPlaceId(1).awaitSingle()
     }
+
+
 
     /**
      * 필터 정보를 주기 위함
@@ -62,8 +65,19 @@ class PlacesApiController(
      * 공통 조건 : 정렬
      */
     @PostMapping("/list/filteredBy/area")
-    suspend fun listPlacesByFilteredBy(@RequestBody areaBaseSearchCondition: AreaBaseSearchCondition) : ResponseEntity<List<PlaceViewDto>>{
+    suspend fun listPlacesByFilteredBy(@RequestBody areaBaseSearchCondition: AreaBaseSearchCondition) : ResponseEntity<List<PlacesListView>>{
+
         return ResponseEntity(SuccessStatus.statusCode,SuccessStatus.statusMessage, placeService.listPlaceViewBy(areaBaseSearchCondition).toList())
+    }
+
+    /**
+     * 선택된 지역 별로 검색 조건에 맞는 장소 목록을 주기 위함
+     * 검색 조건 : 지역 기준 (area(single), subArea(multi))
+     * 공통 조건 : 정렬
+     */
+    @PostMapping("/list/filteredBy/areaTest")
+    suspend fun listPlacesByFilteredByTest(@RequestBody areaBaseSearchCondition: AreaBaseSearchCondition) : ResponseEntity<List<PlacesListView>>{
+        return ResponseEntity(SuccessStatus.statusCode,SuccessStatus.statusMessage, placeService.listPlaceViewByTest(areaBaseSearchCondition).toList())
     }
 
     /**
@@ -73,7 +87,7 @@ class PlacesApiController(
      * 공통 조건 : 정렬
      */
     @PostMapping("/list/filteredBy/location")
-    suspend fun listPlacesByFilteredBy(@RequestBody locationBaseSearchCondition: LocationBaseSearchCondition) : ResponseEntity<List<PlaceViewDto>>{
+    suspend fun listPlacesByFilteredBy(@RequestBody locationBaseSearchCondition: LocationBaseSearchCondition) : ResponseEntity<List<PlacesListView>>{
         return ResponseEntity(SuccessStatus.statusCode,SuccessStatus.statusMessage,placeService.listPlaceViewBy(locationBaseSearchCondition).toList() )
     }
 

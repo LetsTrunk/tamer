@@ -1,9 +1,10 @@
 package com.tamerofficial.infra
 
 import com.tamerofficial.common.Location
+import com.tamerofficial.infra.dao.PlacesListViewRepository
+import com.tamerofficial.infra.entity.PlacesListView
 import kotlinx.coroutines.flow.Flow
 import org.springframework.stereotype.Component
-import java.lang.RuntimeException
 
 class PlaceSearchCriteria(
     val areaCode: String? = null,
@@ -41,15 +42,15 @@ enum class SortBy{
 
 
 @Component
-class PlaceViewQueryFuncFactory(private val placesProjectionRepository: PlacesProjectionRepository) {
-    fun <T> search(condition: T) : (start:Int, end:Int) -> Flow<PlacesView> =
+class PlaceViewQueryFuncFactory(private val placesListViewRepository: PlacesListViewRepository) {
+    fun <T> search(condition: T) : (start:Int, end:Int, currentLocation : Location) -> Flow<PlacesListView> =
         when(condition){
-            is Long -> currying(condition, placesProjectionRepository::findByDistanceIn)
-            is String -> currying(condition, placesProjectionRepository::findByArea)
+            is Long -> currying(condition, placesListViewRepository::findByDistanceIn)
+            is String -> currying(condition, placesListViewRepository::findByArea)
             else -> throw RuntimeException("Not Supported")
         }
 
-    private fun <T> currying(param : T ,fnc : (a:T,start:Int,end:Int)->Flow<PlacesView>) : (start:Int, end:Int) -> Flow<PlacesView> {
-        return { start, end -> fnc.invoke(param,start,end) }
+    private fun <T> currying(param : T ,fnc : (a:T,start:Int,end:Int,currentLocation:Location)->Flow<PlacesListView>) : (start:Int, end:Int,currentLocation : Location) -> Flow<PlacesListView> {
+        return { start, end ,currentLocation-> fnc.invoke(param,start,end,currentLocation) }
     }
 }

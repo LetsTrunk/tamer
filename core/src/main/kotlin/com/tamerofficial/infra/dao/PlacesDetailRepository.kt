@@ -1,23 +1,15 @@
-package com.tamerofficial.infra
+package com.tamerofficial.infra.dao
 
 
-import com.tamerofficial.infra.entity.ScoreAttributeEntity
-import com.tamerofficial.common.Location
-import com.tamerofficial.place.query.Address
-import com.tamerofficial.place.query.Area
-import com.tamerofficial.place.query.PlaceViewDto
-import com.tamerofficial.place.query.SubArea
+import com.tamerofficial.infra.entity.PlacesView
 import kotlinx.coroutines.flow.Flow
-import org.springframework.data.annotation.Id
 import org.springframework.data.r2dbc.repository.Query
-import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.repository.reactive.ReactiveCrudRepository
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
-import java.time.LocalDateTime
 
 @Repository
-interface PlacesProjectionRepository : ReactiveCrudRepository<PlacesView,Long>{
+interface PlacesDetailRepository : ReactiveCrudRepository<PlacesView,Long>{
 
     /***
      * 조건이 될수 있는 조합들은..?
@@ -201,57 +193,3 @@ interface PlacesProjectionRepository : ReactiveCrudRepository<PlacesView,Long>{
                 " LIMIT :start,:end")
     fun findByArea(areaCode: String, start: Int, end: Int) : Flow<PlacesView>
 }
-
-
-data class PlacesView(
-    @Id
-    @Column("place_id")
-    val placeId: Long? = null,
-
-    @Column("place_name")
-    val name : String,
-    @Column("place_desc")
-    val desc : String,
-
-    @Column("latitude")
-    val lat : Long,
-    @Column("longitude")
-    val lon : Long,
-
-    @Column("address1")
-    val address1: String,
-    @Column("address2")
-    val address2: String,
-
-    @Column("area_id")
-    val areaId : Long = 0,
-
-    @Column("area_name")
-    val areaName : String,
-
-    @Column("subarea_id")
-    val subareaId : Long = 0,
-
-    @Column("subarea_name")
-    val subareaName : String,
-
-    @Transient
-    var scores : List<ScoreAttributeEntity> = mutableListOf(),
-
-    @Column("createdAt")
-    val createdAt : LocalDateTime?,
-    @Column("updatedAt")
-    val updatedAt : LocalDateTime?
-){
-    fun toDto() : PlaceViewDto {
-         return PlaceViewDto(
-             placeId= this.placeId!!,
-             name = this.name,
-             address = Address(this.address1,this.address2),
-             area = Area(areaId = this.areaId, name = this.areaName),
-             subArea = SubArea(subAreaId = this.subareaId, name = this.subareaName),
-             location = Location(lat = this.lat, lon = this.lon)
-         )
-    }
-}
-

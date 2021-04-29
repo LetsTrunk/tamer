@@ -2,14 +2,13 @@ package com.tamerofficial.app.places
 
 import com.tamerofficial.app.places.dto.AreaBaseSearchCondition
 import com.tamerofficial.app.places.dto.LocationBaseSearchCondition
+import com.tamerofficial.infra.PlaceViewQueryFuncFactory
 import com.tamerofficial.infra.dao.FilterAttributesRepository
-import com.tamerofficial.infra.PlacesProjectionRepository
-import com.tamerofficial.infra.ScoreAttributeRepository
-import com.tamerofficial.place.query.PlaceViewDto
+import com.tamerofficial.infra.dao.PlacesListViewRepository
+import com.tamerofficial.infra.dao.ScoreAttributeRepository
+import com.tamerofficial.infra.entity.PlacesListView
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.toList
 import org.springframework.stereotype.Service
 
 //검색 조건에 따라서 쿼리가 바뀐다.
@@ -19,30 +18,33 @@ import org.springframework.stereotype.Service
 
 @Service
 class PlaceService(
+    private val queryFuncFactory: PlaceViewQueryFuncFactory,
     private val filterRepository: FilterAttributesRepository,
-    private val placesProjectionRepository: PlacesProjectionRepository,
+    private val placesListViewRepository: PlacesListViewRepository,
     private val scoreAttributeRepository: ScoreAttributeRepository
     ) {
 
-    suspend fun listPlaceViewBy(locationBaseSearchCondition: LocationBaseSearchCondition) : Flow<PlaceViewDto> = coroutineScope {
+    suspend fun listPlaceViewBy(locationBaseSearchCondition: LocationBaseSearchCondition) : Flow<PlacesListView> = coroutineScope {
         //반경 목록 갯수, 조회
-        return@coroutineScope placesProjectionRepository.findByDistanceIn(locationBaseSearchCondition.distanceFrom!!.distance,0,300).map{
-            val result = scoreAttributeRepository.findByPlaceId(it.placeId!!).toList()
-            it.scores = it.scores + result
-            it.toDto()
-        }
+        val queryFunc = queryFuncFactory.search(locationBaseSearchCondition.distanceFrom!!.distance)
+        return@coroutineScope queryFunc(0,300,locationBaseSearchCondition.distanceFrom.currentLocation)
     }
 
     /**
      * 위치, 지역 기반 검색 조건을 갖고, 검색 수행한다.
      */
-    suspend fun listPlaceViewBy(areaBaseSearchCondition: AreaBaseSearchCondition) : Flow<PlaceViewDto> = coroutineScope {
+    suspend fun listPlaceViewBy(areaBaseSearchCondition: AreaBaseSearchCondition) : Flow<PlacesListView> = coroutineScope {
         //반경 목록 갯수, 조회
-        return@coroutineScope placesProjectionRepository.findByArea(areaBaseSearchCondition.areaCode!!,0,300).map{
-            val result = scoreAttributeRepository.findByPlaceId(it.placeId!!).toList()
-            it.scores = it.scores + result
-            it.toDto()
-        }
+        val queryFunc = queryFuncFactory.search(areaBaseSearchCondition.areaCode)
+        return@coroutineScope queryFunc(0,300,areaBaseSearchCondition.distanceFrom!!.currentLocation)
+    }
+
+    /**
+     * 위치, 지역 기반 검색 조건을 갖고, 검색 수행한다.
+     */
+    suspend fun listPlaceViewByTest(areaBaseSearchCondition: AreaBaseSearchCondition) : Flow<PlacesListView> = coroutineScope {
+        //반경 목록 갯수, 조회
+        return@coroutineScope placesListViewRepository.findByArea(areaBaseSearchCondition.areaCode!!,0,300,areaBaseSearchCondition.distanceFrom!!.currentLocation)
     }
 }
 

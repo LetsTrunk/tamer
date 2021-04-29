@@ -14,6 +14,8 @@ data class FilterAttributeEntity(
     @Column("filter_name")
     val name : String? = null,
 
+    @Column("filter_type")
+    val type : String? = null
 //    @Column("createdAt")
 //    val createdAt : LocalDateTime?,
 //

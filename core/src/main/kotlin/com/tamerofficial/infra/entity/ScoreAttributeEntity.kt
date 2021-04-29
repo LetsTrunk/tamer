@@ -1,5 +1,6 @@
 package com.tamerofficial.infra.entity
 
+import com.tamerofficial.place.query.ScoreAttribute
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
@@ -33,4 +34,14 @@ class ScoreAttributeEntity (
 
     @Column("crowding_score")
     val crowdingScore : Long = 0
-)
+){
+    fun toDto() = ScoreAttribute(
+        this.isTrunk,
+        this.levelScore,
+        this.facilitiesScore,
+        this.viewScore,
+        this.accessibilityScore,
+        this.roughnessScore,
+        this.crowdingScore
+    )
+}

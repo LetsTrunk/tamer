@@ -4,19 +4,21 @@ import com.tamerofficial.common.Location
 
 
 abstract class PlaceSearchConditions(
+    open val distanceFrom : DistanceFrom? = null,
     open val sortBy : String
 )
 
 data class AreaBaseSearchCondition(
     val areaCode : String? = null,
     val subAreas : List<String> = emptyList(),
+    override val distanceFrom: DistanceFrom? = null,
     override val sortBy: String = ""
-) : PlaceSearchConditions(sortBy)
+) : PlaceSearchConditions(distanceFrom,sortBy)
 
 data class LocationBaseSearchCondition(
-    val distanceFrom: DistanceFrom? = null,
+    override val distanceFrom: DistanceFrom? = null,
     override val sortBy: String = ""
-) : PlaceSearchConditions(sortBy)
+) : PlaceSearchConditions(distanceFrom,sortBy)
 
 data class DistanceFrom(
     val currentLocation: Location,

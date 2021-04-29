@@ -2,7 +2,9 @@ CREATE TABLE places(
     place_id BIGINT NOT NULL AUTO_INCREMENT,
     place_name VARCHAR(255) NOT NULL,
     place_desc TEXT,
-    
+
+    is_trunk TINYINT(1),
+
     latitude DECIMAL(16,14),
     longitude DECIMAL(17,14),
 
@@ -75,9 +77,7 @@ INSERT INTO place_filter_attributes(filter_name,filter_type) VALUES ('PET','FACI
 
 CREATE TABLE place_score_attributes(
     score_filter_attr_id BIGINT NOT NULL AUTO_INCREMENT,
-    place_id BIGINT NOT NULL, 
-    is_trunk TINYINT(1),
-
+    place_id BIGINT NOT NULL,
     level_score INT(10) UNSIGNED,
     facilities_score INT(10) UNSIGNED,
     view_score INT(10) UNSIGNED,
@@ -90,8 +90,8 @@ CREATE TABLE place_score_attributes(
     PRIMARY KEY (score_filter_attr_id)
 )
 
-INSERT INTO place_score_attributes( place_id, is_trunk, level_score, facilities_score, view_score, accessibility_score, roughness_score, crowding_score, createdAt, updatedAt)
-VALUES (1,0,10,10,10,10,10,10, now(),now());
+INSERT INTO place_score_attributes( place_id, level_score, facilities_score, view_score, accessibility_score, roughness_score, crowding_score, createdAt, updatedAt)
+VALUES (1,10,10,10,10,10,10, now(),now());
 
 SELECT *,
 	(6371*acos(cos(radians(37.4685225))*cos(radians(latitude))*cos(radians(longitude)
@@ -109,12 +109,12 @@ SELECT place_id, place_name, place_desc, latitude, longitude, address1, address2
             a.area_id as area_id, a.area_name as area_name,
             a2.area_id as subarea_id, a2.area_name as subarea_name,
             createdAt, updatedAt,
-            (6371*acos(cos(radians(37.4685225))*cos(radians(latitude))*cos(radians(longitude)-radians(126.8943311))+sin(radians(37.4685225))*sin(radians(latitude))))
+            (6371*acos(cos(radians(37.4485225))*cos(radians(latitude))*cos(radians(longitude)-radians(126.8943311))+sin(radians(37.4485225))*sin(radians(latitude))))
             AS distance
 FROM places p 
 INNER JOIN areas a ON p.area_id = a.area_id 
 INNER JOIN areas a2 ON p.subarea_id = a2.area_id
-HAVING distance <= 0.3
+HAVING distance <= 10
 ORDER BY distance 
 LIMIT 0,300
 
