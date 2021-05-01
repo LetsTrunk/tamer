@@ -49,7 +49,10 @@ CREATE TABLE place_filter_attributes(
     filter_type VARCHAR(100) NOT NULL,
     createdAt DATETIME NOT NULL DEFAULT NOW(),
     updatedAt DATETIME NOT NULL DEFAULT NOW(),
-    PRIMARY KEY (filter_attr_id)
+    PRIMARY KEY (filter_attr_id),
+    INDEX `place_filter_attributes_idx0` (`filter_name`),
+    INDEX `place_filter_attributes_idx1` (`filter_type`),
+    INDEX `place_filter_attributes_idx2` (`updatedAt`)
 )
 
 INSERT INTO place_filter_attributes(filter_name,filter_type) VALUES ('CAR_CAMP','CAMPING_TYPE');

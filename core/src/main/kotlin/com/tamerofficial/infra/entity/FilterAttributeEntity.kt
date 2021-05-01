@@ -1,8 +1,13 @@
 package com.tamerofficial.infra.entity
 
+import com.tamerofficial.common.utils.safeValueOf
+import com.tamerofficial.place.query.FilterAttributeDto
+import com.tamerofficial.place.query.FilterType
+import org.apache.logging.log4j.util.Strings
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
+import java.time.LocalDateTime
 
 
 @Table("place_filter_attributes")
@@ -12,15 +17,20 @@ data class FilterAttributeEntity(
     val filterAttrId: Long? = null,
 
     @Column("filter_name")
-    val name : String? = null,
+    val name : String,
 
     @Column("filter_type")
-    val type : String? = null
-//    @Column("createdAt")
-//    val createdAt : LocalDateTime?,
-//
-//    @Column("updatedAt")
-//    val updatedAt : LocalDateTime?
-){
+    val type : String,
 
+    @Column("createdAt")
+    val createdAt : LocalDateTime?,
+
+    @Column("updatedAt")
+    val updatedAt : LocalDateTime?
+){
+    fun toDto() = FilterAttributeDto(
+        filterAttrId = this.filterAttrId,
+        name = this.name,
+        type =  safeValueOf<FilterType>(this.type)?.name ?: Strings.EMPTY
+    )
 }

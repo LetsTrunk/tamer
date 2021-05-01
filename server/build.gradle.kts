@@ -18,6 +18,8 @@ dependencies {
 //    runtimeOnly("com.h2database:h2")
 //    runtimeOnly("io.r2dbc:r2dbc-h2")
 
+    implementation("org.springdoc:springdoc-openapi-webflux-ui:1.3.4")
+
     implementation("mysql:mysql-connector-java")
     implementation("dev.miku:r2dbc-mysql")
 

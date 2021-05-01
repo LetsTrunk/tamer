@@ -6,15 +6,12 @@ import com.tamerofficial.app.places.dto.LocationBaseSearchCondition
 import com.tamerofficial.common.Log
 import com.tamerofficial.common.ResponseEntity
 import com.tamerofficial.common.SuccessStatus
-import com.tamerofficial.infra.dao.FilterAttributesRepository
-import com.tamerofficial.infra.dao.PlacesListViewRepository
 import com.tamerofficial.infra.dao.ScoreAttributeRepository
-import com.tamerofficial.infra.entity.FilterAttributeEntity
 import com.tamerofficial.infra.entity.PlacesListView
 import com.tamerofficial.infra.entity.ScoreAttributeEntity
-import com.tamerofficial.place.query.FilterAttribute
+import com.tamerofficial.place.query.FilterAttributeDto
+import com.tamerofficial.place.query.FilterQueryService
 import com.tamerofficial.place.query.PlaceViewDto
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.reactive.awaitSingle
 import org.springframework.web.bind.annotation.*
@@ -23,31 +20,23 @@ import org.springframework.web.bind.annotation.*
 @RestController
 class PlacesApiController(
     private val placeService: PlaceService,
-    private val filterRepository: FilterAttributesRepository,
+    private val filterQueryService: FilterQueryService,
     private val scoreAttributeRepository: ScoreAttributeRepository
     ) {
     companion object : Log
-
-    /**
-     * R2DBC 테스팅
-     */
-    @GetMapping("/test")
-    suspend fun test() : FilterAttributeEntity {
-        return filterRepository.save(FilterAttributeEntity(name = "test")).awaitSingle()
-    }
 
     @GetMapping("/test2")
     suspend fun test2() : ScoreAttributeEntity {
         return scoreAttributeRepository.findByPlaceId(1).awaitSingle()
     }
 
-
-
     /**
      * 필터 정보를 주기 위함
      */
-    suspend fun listFilters() : ResponseEntity<List<FilterAttribute>>{
-        return ResponseEntity(SuccessStatus.statusCode, SuccessStatus.statusMessage, emptyList())
+    @GetMapping("/list/filter")
+    suspend fun listFilters() : ResponseEntity<List<FilterAttributeDto>>{
+
+        return ResponseEntity(SuccessStatus.statusCode, SuccessStatus.statusMessage, filterQueryService.listFilterAttributes().toList())
     }
 
     /**
