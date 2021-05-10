@@ -1,12 +1,10 @@
-package com.tamerofficial.app.places
+package com.tamerofficial.place.query
 
-import com.tamerofficial.app.places.dto.AreaBaseSearchCondition
-import com.tamerofficial.app.places.dto.LocationBaseSearchCondition
-import com.tamerofficial.infra.PlaceViewQueryFuncFactory
-import com.tamerofficial.infra.dao.FilterAttributesRepository
-import com.tamerofficial.infra.dao.PlacesListViewRepository
-import com.tamerofficial.infra.dao.ScoreAttributeRepository
-import com.tamerofficial.infra.entity.PlacesListView
+import com.tamerofficial.place.infra.PlaceViewQueryFuncFactory
+import com.tamerofficial.place.infra.dao.FilterAttributesRepository
+import com.tamerofficial.place.infra.dao.PlacesListViewRepository
+import com.tamerofficial.place.infra.dao.ScoreAttributeRepository
+import com.tamerofficial.place.infra.entity.PlacesListView
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import org.springframework.stereotype.Service

@@ -1,7 +1,6 @@
-package com.tamerofficial.app.places.dto
+package com.tamerofficial.place.query
 
 import com.tamerofficial.common.Location
-
 
 abstract class PlaceSearchConditions(
     open val distanceFrom : DistanceFrom? = null,

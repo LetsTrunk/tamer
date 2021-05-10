@@ -1,6 +1,6 @@
 package com.tamerofficial.place.query
 
-import com.tamerofficial.infra.dao.FilterAttributesRepository
+import com.tamerofficial.place.infra.dao.FilterAttributesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.reactive.asFlow

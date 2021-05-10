@@ -1,10 +1,8 @@
-package com.tamerofficial.infra.dao
+package com.tamerofficial.place.infra.dao
 
 
 import com.tamerofficial.common.Location
-import com.tamerofficial.infra.entity.PlacesEntity
-import com.tamerofficial.infra.entity.PlacesListView
-import com.tamerofficial.infra.entity.PlacesView
+import com.tamerofficial.place.infra.entity.PlacesListView
 import kotlinx.coroutines.flow.Flow
 import org.springframework.data.r2dbc.repository.Query
 import org.springframework.data.repository.reactive.ReactiveCrudRepository

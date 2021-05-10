@@ -1,4 +1,4 @@
-package com.tamerofficial.infra.entity
+package com.tamerofficial.place.infra.entity
 
 import com.tamerofficial.common.utils.safeValueOf
 import com.tamerofficial.place.query.FilterAttributeDto

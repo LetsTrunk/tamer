@@ -1,4 +1,4 @@
-package com.tamerofficial.infra.entity
+package com.tamerofficial.place.infra.entity
 
 import com.tamerofficial.common.Location
 import com.tamerofficial.place.query.Address

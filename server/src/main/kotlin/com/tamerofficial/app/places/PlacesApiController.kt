@@ -1,41 +1,29 @@
 package com.tamerofficial.app.places
 
 
-import com.tamerofficial.app.places.dto.AreaBaseSearchCondition
-import com.tamerofficial.app.places.dto.LocationBaseSearchCondition
+import com.tamerofficial.app.places.dto.AreaBaseSearchRequest
+import com.tamerofficial.app.places.dto.LocationBaseSearchRequest
 import com.tamerofficial.common.Log
 import com.tamerofficial.common.ResponseEntity
 import com.tamerofficial.common.SuccessStatus
-import com.tamerofficial.infra.dao.ScoreAttributeRepository
-import com.tamerofficial.infra.entity.PlacesListView
-import com.tamerofficial.infra.entity.ScoreAttributeEntity
-import com.tamerofficial.place.query.FilterAttributeDto
-import com.tamerofficial.place.query.FilterQueryService
-import com.tamerofficial.place.query.PlaceViewDto
+import com.tamerofficial.place.infra.entity.PlacesListView
+import com.tamerofficial.place.query.*
 import kotlinx.coroutines.flow.toList
-import kotlinx.coroutines.reactive.awaitSingle
 import org.springframework.web.bind.annotation.*
 
 @RequestMapping("/places")
 @RestController
 class PlacesApiController(
     private val placeService: PlaceService,
-    private val filterQueryService: FilterQueryService,
-    private val scoreAttributeRepository: ScoreAttributeRepository
+    private val filterQueryService: FilterQueryService
     ) {
     companion object : Log
-
-    @GetMapping("/test2")
-    suspend fun test2() : ScoreAttributeEntity {
-        return scoreAttributeRepository.findByPlaceId(1).awaitSingle()
-    }
 
     /**
      * 필터 정보를 주기 위함
      */
     @GetMapping("/list/filter")
     suspend fun listFilters() : ResponseEntity<List<FilterAttributeDto>>{
-
         return ResponseEntity(SuccessStatus.statusCode, SuccessStatus.statusMessage, filterQueryService.listFilterAttributes().toList())
     }
 
@@ -54,9 +42,14 @@ class PlacesApiController(
      * 공통 조건 : 정렬
      */
     @PostMapping("/list/filteredBy/area")
-    suspend fun listPlacesByFilteredBy(@RequestBody areaBaseSearchCondition: AreaBaseSearchCondition) : ResponseEntity<List<PlacesListView>>{
-
-        return ResponseEntity(SuccessStatus.statusCode,SuccessStatus.statusMessage, placeService.listPlaceViewBy(areaBaseSearchCondition).toList())
+    suspend fun listPlacesByFilteredBy(@RequestBody request: AreaBaseSearchRequest) : ResponseEntity<List<PlacesListView>>{
+        val searchCondition = AreaBaseSearchCondition(
+            request.areaCode,
+            request.subAreas,
+            DistanceFrom(request.currentLocation,request.distance),
+            request.sortBy
+        )
+        return ResponseEntity(SuccessStatus.statusCode,SuccessStatus.statusMessage, placeService.listPlaceViewBy(searchCondition).toList())
     }
 
     /**
@@ -65,8 +58,14 @@ class PlacesApiController(
      * 공통 조건 : 정렬
      */
     @PostMapping("/list/filteredBy/areaTest")
-    suspend fun listPlacesByFilteredByTest(@RequestBody areaBaseSearchCondition: AreaBaseSearchCondition) : ResponseEntity<List<PlacesListView>>{
-        return ResponseEntity(SuccessStatus.statusCode,SuccessStatus.statusMessage, placeService.listPlaceViewByTest(areaBaseSearchCondition).toList())
+    suspend fun listPlacesByFilteredByTest(@RequestBody request: AreaBaseSearchRequest) : ResponseEntity<List<PlacesListView>>{
+        val searchCondition = AreaBaseSearchCondition(
+            request.areaCode,
+            request.subAreas,
+            DistanceFrom(request.currentLocation,request.distance),
+            request.sortBy
+        )
+        return ResponseEntity(SuccessStatus.statusCode,SuccessStatus.statusMessage, placeService.listPlaceViewByTest(searchCondition).toList())
     }
 
     /**
@@ -76,8 +75,12 @@ class PlacesApiController(
      * 공통 조건 : 정렬
      */
     @PostMapping("/list/filteredBy/location")
-    suspend fun listPlacesByFilteredBy(@RequestBody locationBaseSearchCondition: LocationBaseSearchCondition) : ResponseEntity<List<PlacesListView>>{
-        return ResponseEntity(SuccessStatus.statusCode,SuccessStatus.statusMessage,placeService.listPlaceViewBy(locationBaseSearchCondition).toList() )
+    suspend fun listPlacesByFilteredBy(@RequestBody request: LocationBaseSearchRequest) : ResponseEntity<List<PlacesListView>>{
+        val searchCondition = LocationBaseSearchCondition(
+            DistanceFrom(request.currentLocation,request.distance),
+            request.sortBy
+        )
+        return ResponseEntity(SuccessStatus.statusCode,SuccessStatus.statusMessage,placeService.listPlaceViewBy(searchCondition).toList() )
     }
 
     /**

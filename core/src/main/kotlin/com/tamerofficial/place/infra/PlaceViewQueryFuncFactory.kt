@@ -1,8 +1,8 @@
-package com.tamerofficial.infra
+package com.tamerofficial.place.infra
 
 import com.tamerofficial.common.Location
-import com.tamerofficial.infra.dao.PlacesListViewRepository
-import com.tamerofficial.infra.entity.PlacesListView
+import com.tamerofficial.place.infra.dao.PlacesListViewRepository
+import com.tamerofficial.place.infra.entity.PlacesListView
 import kotlinx.coroutines.flow.Flow
 import org.springframework.stereotype.Component
 
