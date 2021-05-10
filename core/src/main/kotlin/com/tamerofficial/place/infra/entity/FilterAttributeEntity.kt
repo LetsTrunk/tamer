@@ -22,6 +22,9 @@ data class FilterAttributeEntity(
     @Column("filter_type")
     val type : String,
 
+    @Column("display_name")
+    val displayName : String,
+
     @Column("createdAt")
     val createdAt : LocalDateTime?,
 
@@ -30,6 +33,7 @@ data class FilterAttributeEntity(
 ){
     fun toDto() = FilterAttributeDto(
         filterAttrId = this.filterAttrId,
+        displayName = this.displayName,
         name = this.name,
         type =  safeValueOf<FilterType>(this.type)?.name ?: Strings.EMPTY
     )

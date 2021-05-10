@@ -4,7 +4,9 @@ import com.tamerofficial.common.Location
 
 abstract class PlaceSearchConditions(
     open val distanceFrom : DistanceFrom? = null,
-    open val sortBy : String
+    open val sortBy : String,
+    open val from : Long = 0,
+    open val to : Long = 50
 )
 
 data class AreaBaseSearchCondition(

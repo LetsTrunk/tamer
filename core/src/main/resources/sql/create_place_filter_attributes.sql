@@ -34,8 +34,6 @@ CREATE TABLE areas(
     PRIMARY KEY (area_id)
 )
 
-INSERT INTO areas(area_name)
-
 CREATE TABLE place_images(
     place_image_id BIGINT NOT NULL AUTO_INCREMENT,
     place_id BIGINT NOT NULL,
@@ -43,10 +41,12 @@ CREATE TABLE place_images(
 )
 
 filter_type : CAMPING_TYPE, PLACE_TYPE, SCALE, COST, FACILITY
+
 CREATE TABLE place_filter_attributes(
     filter_attr_id BIGINT NOT NULL AUTO_INCREMENT,
     filter_name VARCHAR(100) NOT NULL,
     filter_type VARCHAR(100) NOT NULL,
+    display_name VARCHAR(100) NOT NULL,
     createdAt DATETIME NOT NULL DEFAULT NOW(),
     updatedAt DATETIME NOT NULL DEFAULT NOW(),
     PRIMARY KEY (filter_attr_id),
