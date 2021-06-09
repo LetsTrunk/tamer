@@ -83,12 +83,12 @@ class PlacesApiController(
         return ResponseEntity(SuccessStatus.statusCode,SuccessStatus.statusMessage,placeService.listPlaceViewBy(searchCondition).toList() )
     }
 
-    /**
-     * 선택된 장소의 상세 정보를 조회 하기 위함
-     * param : placeId
-     */
-    @GetMapping("/detail/{placeId}")
-    suspend fun detailPlaces(@PathVariable("placeId") placeId : Long) : ResponseEntity<PlaceViewDto> {
-        return ResponseEntity("","")
-    }
+//    /**
+//     * 선택된 장소의 상세 정보를 조회 하기 위함
+//     * param : placeId
+//     */
+//    @GetMapping("/detail/{placeId}")
+//    suspend fun detailPlaces(@PathVariable("placeId") placeId : Long) : ResponseEntity<PlaceViewDto> {
+//        return ResponseEntity("","")
+//    }
 }
