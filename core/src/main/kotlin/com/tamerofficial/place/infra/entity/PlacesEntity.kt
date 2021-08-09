@@ -49,6 +49,9 @@ data class PlacesEntity(
     @Column("updatedAt")
     val updatedAt : LocalDateTime?,
 
+    @Column("score")
+    val score : Double,
+
     @Transient
     var scoreAttribute : ScoreAttributeEntity,
     @Transient

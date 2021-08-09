@@ -32,7 +32,7 @@ data class FilterAttributeEntity(
     val updatedAt : LocalDateTime?
 ){
     fun toDto() = FilterAttributeDto(
-        filterAttrId = this.filterAttrId,
+        filterAttrId = this.filterAttrId ?: 0,
         displayName = this.displayName,
         name = this.name,
         type =  safeValueOf<FilterType>(this.type)?.name ?: Strings.EMPTY

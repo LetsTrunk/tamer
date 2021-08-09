@@ -5,9 +5,8 @@ enum class FilterType{
 }
 
 data class FilterAttributeDto(
-    val filterAttrId: Long?,
+    val filterAttrId: Long,
     val displayName: String,
     val name: String,
     val type: String
-){
-}
+)

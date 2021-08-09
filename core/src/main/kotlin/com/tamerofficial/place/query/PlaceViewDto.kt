@@ -2,6 +2,7 @@ package com.tamerofficial.place.query
 
 import com.tamerofficial.common.Location
 import com.tamerofficial.place.command.domain.Review
+import com.tamerofficial.place.query.pages.FilterAttribute
 
 data class PlaceViewDto(
     val placeId: Long, // PK
@@ -35,13 +36,6 @@ data class ScoreAttribute(
     val accessibilityScore: Long,
     val roughnessScore : Long,
     val crowdingScore : Long
-)
-data class FilterAttribute(
-    val campingType: String, // car, carpicnic, camping
-    val placeType: String, //mountain, sea, valley, reservoir ,river, lake
-    val scale: String,
-    val prices: Long, //1회 기준으로 산정하자 시간당으로 매기는곳 없음
-    val facilities : List<Facility>
 )
 
 data class Facility(val name: String)

@@ -1,7 +1,6 @@
 package com.tamerofficial.place.infra.dao
 
 
-import com.tamerofficial.place.infra.entity.PlacesDetailView
 import com.tamerofficial.place.infra.entity.PlacesView
 import kotlinx.coroutines.flow.Flow
 import org.springframework.data.r2dbc.repository.Query
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
 
 @Repository
-interface PlacesDetailRepository : ReactiveCrudRepository<PlacesDetailView,Long>{
+interface PlacesDetailRepository : ReactiveCrudRepository<PlacesView,Long>{
 
     /***
      * 조건이 될수 있는 조합들은..?
@@ -167,7 +166,7 @@ interface PlacesDetailRepository : ReactiveCrudRepository<PlacesDetailView,Long>
             "a2.area_id as subarea_id, a2.area_name as subarea_name, " +
             "createdAt, updatedAt" +
             " FROM places p INNER JOIN areas a ON p.area_id = a.area_id INNER JOIN areas a2 ON p.subarea_id = a2.area_id")
-    override fun findAll(): Flux<PlacesDetailView>
+    override fun findAll(): Flux<PlacesView>
 
     @Query("SELECT place_id, place_name, place_desc, latitude, longitude, address1, address2," +
             "            a.area_id as area_id, a.area_name as area_name," +

@@ -42,6 +42,12 @@ data class PlacesView(
     @Column("subarea_name")
     val subareaName : String,
 
+    @Column("is_trunk")
+    val isTrunk : Boolean,
+
+    @Column("score")
+    val score : Double,
+
     @Transient
     var scores : ScoreAttributeEntity? = null,
 
