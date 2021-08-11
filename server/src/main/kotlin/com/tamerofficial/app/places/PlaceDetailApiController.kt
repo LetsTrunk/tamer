@@ -2,9 +2,8 @@ package com.tamerofficial.app.places
 
 import com.tamerofficial.common.ResponseEntity
 import com.tamerofficial.common.SuccessStatus
-import com.tamerofficial.place.infra.entity.PlacesDetailView
-import com.tamerofficial.place.infra.entity.PlacesView
-import com.tamerofficial.place.query.PlaceDetailService
+import com.tamerofficial.place.query.PlaceDetailServiceImplV1
+import com.tamerofficial.place.query.interfaces.PlaceDetailService
 import com.tamerofficial.place.query.mappers.PlaceToPlaceDetailMapper
 import com.tamerofficial.place.query.pages.Place
 import kotlinx.coroutines.reactive.awaitFirstOrNull

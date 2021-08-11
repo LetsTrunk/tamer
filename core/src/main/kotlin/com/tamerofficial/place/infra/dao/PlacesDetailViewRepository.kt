@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
 
 @Repository
-interface PlacesDetailRepository : ReactiveCrudRepository<PlacesView,Long>{
+interface PlacesDetailViewRepository : ReactiveCrudRepository<PlacesView,Long>{
 
     /***
      * 조건이 될수 있는 조합들은..?

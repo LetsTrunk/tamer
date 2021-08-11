@@ -12,45 +12,48 @@ import java.time.LocalDateTime
 data class PlacesEntity(
     @Id
     @Column("place_id")
-    val placeId: Long? = null,
+    var placeId: Long? = null,
 
     @Column("is_trunk")
-    val isTrunk : Boolean = false,
+    var isTrunk : Boolean = false,
 
     @Column("place_name")
-    val name : String,
+    var name : String,
     @Column("place_desc")
-    val desc : String,
+    var desc : String,
 
     @Column("latitude")
-    val lat : Long,
+    var lat : Long,
 
     @Column("longitude")
-    val lon : Long,
+    var lon : Long,
 
     @Column("address1")
-    val address1: String,
+    var address1: String,
     @Column("address2")
-    val address2: String,
+    var address2: String,
 
     @Column("area_id")
-    val areaId : Long = 0,
+    var areaId : Long = 0,
 
     @Column("area_name")
-    val areaName : String,
+    var areaName : String,
     @Column("subarea_id")
-    val subAreaId : Long = 0,
+    var subAreaId : Long = 0,
 
     @Column("subarea_name")
-    val subAreaName : String,
+    var subAreaName : String,
 
     @Column("createdAt")
-    val createdAt : LocalDateTime?,
+    var createdAt : LocalDateTime?,
     @Column("updatedAt")
-    val updatedAt : LocalDateTime?,
+    var updatedAt : LocalDateTime?,
 
     @Column("score")
-    val score : Double,
+    var score : Double,
+
+    @Column("view_count")
+    var viewCount : Long,
 
     @Transient
     var scoreAttribute : ScoreAttributeEntity,
