@@ -1,4 +1,4 @@
-package com.tamerofficial.place.query
+package com.tamerofficial.place.query.dto
 
 enum class FilterType{
     CAMPING_TYPE,PLACE_TYPE,SCALE,COST,FACILITY

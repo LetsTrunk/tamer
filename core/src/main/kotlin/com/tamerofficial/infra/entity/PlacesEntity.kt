@@ -1,4 +1,4 @@
-package com.tamerofficial.place.infra.entity
+package com.tamerofficial.infra.entity
 
 import kotlinx.coroutines.flow.Flow
 import org.springframework.data.annotation.Id
@@ -53,11 +53,6 @@ data class PlacesEntity(
     var score : Double,
 
     @Column("view_count")
-    var viewCount : Long,
-
-    @Transient
-    var scoreAttribute : ScoreAttributeEntity,
-    @Transient
-    var placesFilterAttributeList : Flow<FilterAttributeEntity>,
+    var viewCount : Long
 )
 

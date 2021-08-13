@@ -1,4 +1,4 @@
-package com.tamerofficial.place.infra.entity
+package com.tamerofficial.infra.entity
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
@@ -7,45 +7,52 @@ import java.math.BigDecimal
 import java.time.LocalDateTime
 
 @Table("places")
-data class PlacesListView(
+data class PlaceEntity(
     @Id
     @Column("place_id")
-    val placeId: Long? = null,
+    var placeId: Long? = null,
 
     @Column("is_trunk")
-    val isTrunk : Boolean = false,
+    var isTrunk : Boolean = false,
 
     @Column("place_name")
-    val name : String,
+    var name : String,
     @Column("place_desc")
-    val desc : String,
+    var desc : String,
 
     @Column("latitude")
-    val lat : BigDecimal,
+    var lat : BigDecimal,
 
     @Column("longitude")
-    val lon : BigDecimal,
+    var lon : BigDecimal,
 
-    val distance : Long?,
+    var distance : Long?,
 
     @Column("address1")
-    val address1: String,
+    var address1: String,
     @Column("address2")
-    val address2: String,
+    var address2: String,
 
     @Column("area_id")
-    val areaId : Long = 0,
+    var areaId : Long = 0,
 
     @Column("area_name")
-    val areaName : String,
+    var areaName : String,
+
     @Column("subarea_id")
-    val subAreaId : Long = 0,
+    var subAreaId : Long = 0,
 
     @Column("subarea_name")
-    val subAreaName : String,
+    var subAreaName : String,
+
+    @Column("view_cnt")
+    var viewCount : Long,
+
+    @Column("score")
+    var score : Double,
 
     @Column("createdAt")
-    val createdAt : LocalDateTime?,
+    var createdAt : LocalDateTime?,
     @Column("updatedAt")
-    val updatedAt : LocalDateTime?
+    var updatedAt : LocalDateTime?,
 )

@@ -1,6 +1,6 @@
-package com.tamerofficial.place.infra.dao
+package com.tamerofficial.infra.dao
 
-import com.tamerofficial.place.infra.entity.FilterAttributeEntity
+import com.tamerofficial.infra.entity.FilterAttributeEntity
 import org.springframework.data.repository.reactive.ReactiveCrudRepository
 import org.springframework.stereotype.Repository
 

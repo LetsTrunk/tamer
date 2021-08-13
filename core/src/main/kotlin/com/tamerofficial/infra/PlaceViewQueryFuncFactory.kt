@@ -1,8 +1,8 @@
-package com.tamerofficial.place.infra
+package com.tamerofficial.infra
 
 import com.tamerofficial.common.Location
-import com.tamerofficial.place.infra.dao.PlacesListViewRepository
-import com.tamerofficial.place.infra.entity.PlacesListView
+import com.tamerofficial.infra.dao.PlacesListViewRepository
+import com.tamerofficial.infra.entity.PlaceEntity
 import kotlinx.coroutines.flow.Flow
 import org.springframework.stereotype.Component
 
@@ -43,14 +43,14 @@ enum class SortBy{
 
 @Component
 class PlaceViewQueryFuncFactory(private val placesListViewRepository: PlacesListViewRepository) {
-    fun <T> search(condition: T) : (start:Int, end:Int, currentLocation : Location) -> Flow<PlacesListView> =
+    fun <T> search(condition: T) : (start:Int, end:Int, currentLocation : Location) -> Flow<PlaceEntity> =
         when(condition){
             is Long -> currying(condition, placesListViewRepository::findByDistanceIn)
             is String -> currying(condition, placesListViewRepository::findByArea)
             else -> throw RuntimeException("Not Supported")
         }
 
-    private fun <T> currying(param : T ,fnc : (a:T,start:Int,end:Int,currentLocation:Location)->Flow<PlacesListView>) : (start:Int, end:Int,currentLocation : Location) -> Flow<PlacesListView> {
+    private fun <T> currying(param : T ,fnc : (a:T,start:Int,end:Int,currentLocation:Location)->Flow<PlaceEntity>) : (start:Int, end:Int, currentLocation : Location) -> Flow<PlaceEntity> {
         return { start, end ,currentLocation-> fnc.invoke(param,start,end,currentLocation) }
     }
 }

@@ -1,7 +1,7 @@
-package com.tamerofficial.place.infra.dao
+package com.tamerofficial.infra.dao
 
 
-import com.tamerofficial.place.infra.entity.PlacesView
+import com.tamerofficial.infra.entity.PlaceEntity
 import kotlinx.coroutines.flow.Flow
 import org.springframework.data.r2dbc.repository.Query
 import org.springframework.data.repository.reactive.ReactiveCrudRepository
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
 
 @Repository
-interface PlacesDetailViewRepository : ReactiveCrudRepository<PlacesView,Long>{
+interface PlacesDetailViewRepository : ReactiveCrudRepository<PlaceEntity,Long>{
 
     /***
      * 조건이 될수 있는 조합들은..?
@@ -36,7 +36,7 @@ interface PlacesDetailViewRepository : ReactiveCrudRepository<PlacesView,Long>{
             "HAVING distance <= :distance " +
             "ORDER BY distance DESC " +
             "LIMIT :start,:end")
-    fun findByAreaCodeOrderByDistanceDesc(): Flow<PlacesView>
+    fun findByAreaCodeOrderByDistanceDesc(): Flow<PlaceEntity>
 
     @Query("SELECT place_id, place_name, place_desc, latitude, longitude, address1, address2," +
             "     a.area_id as area_id, a.area_name as area_name," +
@@ -48,7 +48,7 @@ interface PlacesDetailViewRepository : ReactiveCrudRepository<PlacesView,Long>{
             " WHERE a.area_code = :areaCode "+
             " ORDER BY view_cnt DESC"+
             " LIMIT :start,:end")
-    fun findByAreaCodeOrderByViewCntDesc(): Flow<PlacesView>
+    fun findByAreaCodeOrderByViewCntDesc(): Flow<PlaceEntity>
 
     @Query("SELECT place_id, place_name, place_desc, latitude, longitude, address1, address2," +
             "     a.area_id as area_id, a.area_name as area_name," +
@@ -60,7 +60,7 @@ interface PlacesDetailViewRepository : ReactiveCrudRepository<PlacesView,Long>{
             " WHERE a.area_code = :areaCode "+
             " ORDER BY scrap_cnt DESC"+
             " LIMIT :start,:end")
-    fun findByAreaCodeOrderByScrapCntDesc(): Flow<PlacesView>
+    fun findByAreaCodeOrderByScrapCntDesc(): Flow<PlaceEntity>
 
 //    fun findByAreaCodeAndSubAreaCodeOrderByScoreDesc(): Flow<PlacesView>
 
@@ -77,7 +77,7 @@ interface PlacesDetailViewRepository : ReactiveCrudRepository<PlacesView,Long>{
             "HAVING distance <= :distance " +
             "ORDER BY distance DESC " +
             "LIMIT :start,:end")
-    fun findByAreaCodeAndSubAreaCodeOrderByDistanceDesc(): Flow<PlacesView>
+    fun findByAreaCodeAndSubAreaCodeOrderByDistanceDesc(): Flow<PlaceEntity>
 
     @Query("SELECT place_id, place_name, place_desc, latitude, longitude, address1, address2," +
             "     a.area_id as area_id, a.area_name as area_name," +
@@ -89,7 +89,7 @@ interface PlacesDetailViewRepository : ReactiveCrudRepository<PlacesView,Long>{
             " WHERE a.area_code = :areaCode AND a.subarea_code = :subareaCode"+
             " ORDER BY view_cnt DESC"+
             " LIMIT :start,:end")
-    fun findByAreaCodeAndSubAreaCodeOrderByViewCntDesc(): Flow<PlacesView>
+    fun findByAreaCodeAndSubAreaCodeOrderByViewCntDesc(): Flow<PlaceEntity>
 
     @Query("SELECT place_id, place_name, place_desc, latitude, longitude, address1, address2," +
             "     a.area_id as area_id, a.area_name as area_name," +
@@ -101,7 +101,7 @@ interface PlacesDetailViewRepository : ReactiveCrudRepository<PlacesView,Long>{
             " WHERE a.area_code = :areaCode AND a.subarea_code = :subareaCode"+
             " ORDER BY scrap_cnt DESC"+
             " LIMIT :start,:end")
-    fun findByAreaCodeAndSubAreaCodeOrderByScrapCntDesc(): Flow<PlacesView>
+    fun findByAreaCodeAndSubAreaCodeOrderByScrapCntDesc(): Flow<PlaceEntity>
 
 
     @Query("SELECT place_id, place_name, place_desc, latitude, longitude, address1, address2," +
@@ -115,7 +115,7 @@ interface PlacesDetailViewRepository : ReactiveCrudRepository<PlacesView,Long>{
             "INNER JOIN areas a2 ON p.subarea_id = a2.area_id " +
             "HAVING distance <= :distance " +
             "LIMIT :start,:end")
-    fun findByDistanceInOrderByScoreDesc(distance: Long, start: Int, end :Int): Flow<PlacesView>
+    fun findByDistanceInOrderByScoreDesc(distance: Long, start: Int, end :Int): Flow<PlaceEntity>
 
     @Query("SELECT place_id, place_name, place_desc, latitude, longitude, address1, address2," +
             "            a.area_id as area_id, a.area_name as area_name," +
@@ -129,7 +129,7 @@ interface PlacesDetailViewRepository : ReactiveCrudRepository<PlacesView,Long>{
             "HAVING distance <= :distance " +
             "ORDER BY distance DESC " +
             "LIMIT :start,:end")
-    fun findByDistanceInOrderByDistanceDesc(distance: Long, start: Int, end :Int): Flow<PlacesView>
+    fun findByDistanceInOrderByDistanceDesc(distance: Long, start: Int, end :Int): Flow<PlaceEntity>
 
     @Query("SELECT place_id, place_name, place_desc, latitude, longitude, address1, address2," +
             "            a.area_id as area_id, a.area_name as area_name," +
@@ -143,7 +143,7 @@ interface PlacesDetailViewRepository : ReactiveCrudRepository<PlacesView,Long>{
             "HAVING distance <= :distance " +
             "ORDER BY view_cnt DESC " +
             "LIMIT :start,:end")
-    fun findByDistanceInOrderByViewCntDesc(distance: Long, start: Int, end :Int): Flow<PlacesView>
+    fun findByDistanceInOrderByViewCntDesc(distance: Long, start: Int, end :Int): Flow<PlaceEntity>
 
     @Query("SELECT place_id, place_name, place_desc, latitude, longitude, address1, address2," +
             "            a.area_id as area_id, a.area_name as area_name," +
@@ -157,7 +157,7 @@ interface PlacesDetailViewRepository : ReactiveCrudRepository<PlacesView,Long>{
             "HAVING distance <= :distance " +
             "ORDER BY scrap_cnt DESC " +
             "LIMIT :start,:end")
-    fun findByDistanceInOrderByScrapCntDesc(distance: Long, start: Int, end :Int): Flow<PlacesView>
+    fun findByDistanceInOrderByScrapCntDesc(distance: Long, start: Int, end :Int): Flow<PlaceEntity>
 
 
 
@@ -166,7 +166,7 @@ interface PlacesDetailViewRepository : ReactiveCrudRepository<PlacesView,Long>{
             "a2.area_id as subarea_id, a2.area_name as subarea_name, " +
             "createdAt, updatedAt" +
             " FROM places p INNER JOIN areas a ON p.area_id = a.area_id INNER JOIN areas a2 ON p.subarea_id = a2.area_id")
-    override fun findAll(): Flux<PlacesView>
+    override fun findAll(): Flux<PlaceEntity>
 
     @Query("SELECT place_id, place_name, place_desc, latitude, longitude, address1, address2," +
             "            a.area_id as area_id, a.area_name as area_name," +
@@ -180,7 +180,7 @@ interface PlacesDetailViewRepository : ReactiveCrudRepository<PlacesView,Long>{
             "HAVING distance <= :distance " +
             "ORDER BY distance " +
             "LIMIT :start,:end")
-    fun findByDistanceIn(distance: Long, start: Int, end :Int) : Flow<PlacesView>
+    fun findByDistanceIn(distance: Long, start: Int, end :Int) : Flow<PlaceEntity>
 
     @Query("SELECT place_id, place_name, place_desc, latitude, longitude, address1, address2," +
                 "     a.area_id as area_id, a.area_name as area_name," +
@@ -191,5 +191,5 @@ interface PlacesDetailViewRepository : ReactiveCrudRepository<PlacesView,Long>{
                 " INNER JOIN areas a2 ON p.subarea_id = a2.area_id " +
                 " WHERE a.area_code = :areaCode"+
                 " LIMIT :start,:end")
-    fun findByArea(areaCode: String, start: Int, end: Int) : Flow<PlacesView>
+    fun findByArea(areaCode: String, start: Int, end: Int) : Flow<PlaceEntity>
 }

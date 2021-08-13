@@ -17,6 +17,8 @@ CREATE TABLE places(
     view_cnt BIGINT DEFAULT 0,
     scrap_cnt BIGINT DEFAULT 0,
 
+    score BIGINT DEFAULT 0,
+
     createdAt DATETIME NOT NULL DEFAULT NOW(),
     updatedAt DATETIME NOT NULL DEFAULT NOW(),
     PRIMARY KEY (place_id)

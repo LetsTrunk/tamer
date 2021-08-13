@@ -1,6 +1,6 @@
-package com.tamerofficial.place.infra.entity
+package com.tamerofficial.infra.entity
 
-import com.tamerofficial.place.query.ScoreAttribute
+import com.tamerofficial.place.query.dto.ScoreAttribute
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table

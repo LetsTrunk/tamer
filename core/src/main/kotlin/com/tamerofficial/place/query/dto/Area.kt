@@ -1,4 +1,4 @@
-package com.tamerofficial.place.query
+package com.tamerofficial.place.query.dto
 
 data class Area(
     val areaId: Long,

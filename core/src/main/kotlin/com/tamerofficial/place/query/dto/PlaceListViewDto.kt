@@ -1,4 +1,4 @@
-package com.tamerofficial.place.query
+package com.tamerofficial.place.query.dto
 
 data class PlaceListViewDto(
     val placeId : Long,

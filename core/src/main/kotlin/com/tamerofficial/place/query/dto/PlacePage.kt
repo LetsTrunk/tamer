@@ -1,8 +1,5 @@
-package com.tamerofficial.place.query.pages
+package com.tamerofficial.place.query.dto
 
-import com.tamerofficial.place.query.Area
-import com.tamerofficial.place.query.Facility
-import com.tamerofficial.place.query.FilterAttributeDto
 import java.math.BigDecimal
 
 data class PlacePage(

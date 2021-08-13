@@ -1,8 +1,7 @@
-package com.tamerofficial.place.query
+package com.tamerofficial.place.query.dto
 
 import com.tamerofficial.common.Location
 import com.tamerofficial.place.command.domain.Review
-import com.tamerofficial.place.query.pages.FilterAttribute
 
 data class PlaceViewDto(
     val placeId: Long, // PK

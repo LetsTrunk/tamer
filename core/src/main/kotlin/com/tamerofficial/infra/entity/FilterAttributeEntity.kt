@@ -1,8 +1,8 @@
-package com.tamerofficial.place.infra.entity
+package com.tamerofficial.infra.entity
 
 import com.tamerofficial.common.utils.safeValueOf
-import com.tamerofficial.place.query.FilterAttributeDto
-import com.tamerofficial.place.query.FilterType
+import com.tamerofficial.place.query.dto.FilterAttributeDto
+import com.tamerofficial.place.query.dto.FilterType
 import org.apache.logging.log4j.util.Strings
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column

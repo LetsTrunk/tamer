@@ -18,8 +18,8 @@ logging:
 spring:
   r2dbc:
     url: r2dbc:mysql://localhost:3306/tamer?useSSL=false&characterEncoding=utf8
-    username: tamer
-    password: tamer12@@
+    username: root
+    password:
 
   security:
     oauth2:

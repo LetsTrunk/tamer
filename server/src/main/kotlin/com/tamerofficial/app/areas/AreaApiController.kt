@@ -1,7 +1,7 @@
 package com.tamerofficial.app.areas
 
 import com.tamerofficial.common.ResponseEntity
-import com.tamerofficial.place.query.Area
+import com.tamerofficial.place.query.dto.Area
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
