@@ -1,4 +1,10 @@
+
 import org.springframework.boot.gradle.tasks.bundling.BootJar
+
+plugins {
+    kotlin("plugin.jpa")
+    kotlin("kapt")
+}
 
 group = "com.trunkofficial"
 version = "0.0.1-SNAPSHOT"
@@ -11,17 +17,10 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
-//    runtimeOnly("com.h2database:h2")
-//    runtimeOnly("io.r2dbc:r2dbc-h2")
-
-    implementation("org.springdoc:springdoc-openapi-webflux-ui:1.3.4")
-
-    implementation("mysql:mysql-connector-java")
-    implementation("dev.miku:r2dbc-mysql")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")

@@ -216,16 +216,16 @@ class PlacesApiController(
      * 검색 조건 : 지역 기준 (area(single), subArea(multi))
      * 공통 조건 : 정렬
      */
-    @PostMapping("/list/filteredBy/areaTest")
-    suspend fun listPlacesByFilteredByTest(@RequestBody request: AreaBaseSearchRequest) : ResponseEntity<List<PlaceEntity>>{
-        val searchCondition = AreaBaseSearchCondition(
-            request.areaCode,
-            request.subAreas,
-            DistanceFrom(request.currentLocation,request.distance),
-            request.sortBy
-        )
-        return ResponseEntity(SuccessStatus.statusCode,SuccessStatus.statusMessage, placeService.listPlaceViewByTest(searchCondition).toList())
-    }
+//    @PostMapping("/list/filteredBy/areaTest")
+//    suspend fun listPlacesByFilteredByTest(@RequestBody request: AreaBaseSearchRequest) : ResponseEntity<List<PlaceEntity>>{
+//        val searchCondition = AreaBaseSearchCondition(
+//            request.areaCode,
+//            request.subAreas,
+//            DistanceFrom(request.currentLocation,request.distance),
+//            request.sortBy
+//        )
+//        return ResponseEntity(SuccessStatus.statusCode,SuccessStatus.statusMessage, placeService.listPlaceViewByTest(searchCondition).toList())
+//    }
 
     /**
      * 현재 위치 별로 검색 조건에 맞는 장소 목록을 주기 위함
@@ -233,14 +233,14 @@ class PlacesApiController(
      * 반경 조회
      * 공통 조건 : 정렬
      */
-    @PostMapping("/list/filteredBy/location")
-    suspend fun listPlacesByFilteredBy(@RequestBody request: LocationBaseSearchRequest) : ResponseEntity<List<PlaceEntity>>{
-        val searchCondition = LocationBaseSearchCondition(
-            DistanceFrom(request.currentLocation,request.distance),
-            request.sortBy
-        )
-        return ResponseEntity(SuccessStatus.statusCode,SuccessStatus.statusMessage,placeService.listPlaceViewBy(searchCondition).toList() )
-    }
+//    @PostMapping("/list/filteredBy/location")
+//    suspend fun listPlacesByFilteredBy(@RequestBody request: LocationBaseSearchRequest) : ResponseEntity<List<PlaceEntity>>{
+//        val searchCondition = LocationBaseSearchCondition(
+//            DistanceFrom(request.currentLocation,request.distance),
+//            request.sortBy
+//        )
+//        return ResponseEntity(SuccessStatus.statusCode,SuccessStatus.statusMessage,placeService.listPlaceViewBy(searchCondition).toList() )
+//    }
 
 //    /**
 //     * 선택된 장소의 상세 정보를 조회 하기 위함

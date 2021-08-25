@@ -1,7 +1,7 @@
 package com.tamerofficial.infra.dao
 
 import com.tamerofficial.infra.entity.ReviewEntity
-import org.springframework.data.repository.reactive.ReactiveCrudRepository
+import org.springframework.data.repository.CrudRepository
 
-interface ReviewRepository : ReactiveCrudRepository<ReviewEntity, Long> {
+interface ReviewRepository : CrudRepository<ReviewEntity, Long> {
 }

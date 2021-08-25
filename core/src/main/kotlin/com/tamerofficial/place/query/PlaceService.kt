@@ -22,28 +22,28 @@ class PlaceService(
     private val scoreAttributeRepository: ScoreAttributeRepository
     ) {
 
-    suspend fun listPlaceViewBy(locationBaseSearchCondition: LocationBaseSearchCondition) : Flow<PlaceEntity> = coroutineScope {
-        //반경 목록 갯수, 조회
-        val queryFunc = queryFuncFactory.search(locationBaseSearchCondition.distanceFrom!!.distance)
-        return@coroutineScope queryFunc(0,300,locationBaseSearchCondition.distanceFrom.currentLocation)
-    }
+//    suspend fun listPlaceViewBy(locationBaseSearchCondition: LocationBaseSearchCondition) : Flow<PlaceEntity> = coroutineScope {
+//        //반경 목록 갯수, 조회
+//        val queryFunc = queryFuncFactory.search(locationBaseSearchCondition.distanceFrom!!.distance)
+//        return@coroutineScope queryFunc(0,300,locationBaseSearchCondition.distanceFrom.currentLocation)
+//    }
 
     /**
      * 위치, 지역 기반 검색 조건을 갖고, 검색 수행한다.
      */
-    suspend fun listPlaceViewBy(areaBaseSearchCondition: AreaBaseSearchCondition) : Flow<PlaceEntity> = coroutineScope {
-        //반경 목록 갯수, 조회
-        val queryFunc = queryFuncFactory.search(areaBaseSearchCondition.areaCode)
-        return@coroutineScope queryFunc(0,300,areaBaseSearchCondition.distanceFrom!!.currentLocation)
-    }
+//    suspend fun listPlaceViewBy(areaBaseSearchCondition: AreaBaseSearchCondition) : Flow<PlaceEntity> = coroutineScope {
+//        //반경 목록 갯수, 조회
+//        val queryFunc = queryFuncFactory.search(areaBaseSearchCondition.areaCode)
+//        return@coroutineScope queryFunc(0,300,areaBaseSearchCondition.distanceFrom!!.currentLocation)
+//    }
 
     /**
      * 위치, 지역 기반 검색 조건을 갖고, 검색 수행한다.
      */
-    suspend fun listPlaceViewByTest(areaBaseSearchCondition: AreaBaseSearchCondition) : Flow<PlaceEntity> = coroutineScope {
-        //반경 목록 갯수, 조회
-        return@coroutineScope placesListViewRepository.findByArea(areaBaseSearchCondition.areaCode!!,0,300,areaBaseSearchCondition.distanceFrom!!.currentLocation)
-    }
+//    suspend fun listPlaceViewByTest(areaBaseSearchCondition: AreaBaseSearchCondition) : Flow<PlaceEntity> = coroutineScope {
+//        //반경 목록 갯수, 조회
+//        return@coroutineScope placesListViewRepository.findByArea(areaBaseSearchCondition.areaCode!!,0,300,areaBaseSearchCondition.distanceFrom!!.currentLocation)
+//    }
 }
 
 

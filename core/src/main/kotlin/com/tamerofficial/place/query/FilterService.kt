@@ -2,20 +2,17 @@ package com.tamerofficial.place.query
 
 import com.tamerofficial.infra.dao.FilterAttributesRepository
 import com.tamerofficial.place.query.dto.FilterAttributeDto
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.reactive.asFlow
 import org.springframework.stereotype.Service
 
 interface FilterQueryService {
-    fun listFilterAttributes(): Flow<FilterAttributeDto>
+    fun listFilterAttributes(): List<FilterAttributeDto>
 }
 
 @Service
 class FilterQueryServiceImpl(
     private val filterAttributesRepository: FilterAttributesRepository
 ) : FilterQueryService {
-    override fun listFilterAttributes(): Flow<FilterAttributeDto> {
-        return filterAttributesRepository.findAll().asFlow().map { it.toDto() }
+    override fun listFilterAttributes(): List<FilterAttributeDto> {
+        return filterAttributesRepository.findAll().map { it.toDto() }
     }
 }

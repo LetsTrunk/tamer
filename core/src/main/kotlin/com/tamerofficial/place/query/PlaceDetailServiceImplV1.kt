@@ -10,20 +10,16 @@ import reactor.core.publisher.Mono
 
 @Service
 class PlaceDetailServiceImplV1(
-    private val placesDetailViewRepository: PlacesDetailViewRepository,
-    private val placeRepository: PlaceRepository
+//    private val placesDetailViewRepository: PlacesDetailViewRepository,
+//    private val placeRepository: PlaceRepository
     //리뷰 repo 추가 할 것
 ) : PlaceDetailService {
 
-    override suspend fun searchPlaceDetail(placeId : Long) : Mono<PlaceViewDto> {
-        return placeRepository.findById(placeId).map { it.toDto() }
+    override suspend fun searchPlaceDetail(placeId: Long): Mono<PlaceViewDto> {
+        TODO("Not yet implemented")
     }
 
     override suspend fun addPlaceDetailViewCount(placeId: Long): Mono<Void> {
-        val placeMono = placeRepository.findById(placeId)
-        return placeMono.flatMap {
-            it.viewCount++
-            placeRepository.save(it)
-        }.then()
+        TODO("Not yet implemented")
     }
 }

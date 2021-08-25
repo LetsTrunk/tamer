@@ -1,32 +1,16 @@
 package com.tamerofficial.app.oauth
 
-import com.fasterxml.jackson.databind.JsonNode
 import com.tamerofficial.common.Log
-import kotlinx.coroutines.reactive.asFlow
-import kotlinx.coroutines.reactive.awaitSingle
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.core.ParameterizedTypeReference
-import org.springframework.http.HttpHeaders
-import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient
 import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient
-import org.springframework.security.oauth2.client.web.reactive.function.client.ServerOAuth2AuthorizedClientExchangeFilterFunction.oauth2AuthorizedClient
 import org.springframework.security.oauth2.core.user.OAuth2User
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.util.LinkedMultiValueMap
-import org.springframework.util.MultiValueMap
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.reactive.function.client.WebClient
-import org.springframework.web.reactive.function.client.bodyToMono
-import org.springframework.web.util.UriBuilder
-import reactor.core.publisher.Flux
-import reactor.core.publisher.Mono
-import java.lang.RuntimeException
-import java.lang.StringBuilder
-import java.net.URLEncoder
 
 
 // 1. 사용자가 접근
@@ -41,8 +25,8 @@ class OauthController {
 
     companion object : Log
 
-    @Autowired
-    lateinit var webClient: WebClient
+//    @Autowired
+//    lateinit var webClient: WebClient
 
 /************* Test Code *************
     // 사용자가 접근하는 상황

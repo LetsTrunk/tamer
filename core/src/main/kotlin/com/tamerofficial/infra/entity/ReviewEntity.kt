@@ -1,10 +1,11 @@
 package com.tamerofficial.infra.entity
 
-import org.springframework.data.annotation.Id
-import org.springframework.data.relational.core.mapping.Column
+import javax.persistence.*
 
+@Entity
+@Table(name="reviews")
 data class ReviewEntity(
     @Id
-    @Column("review_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var reviewId: Long? = null,
 )
