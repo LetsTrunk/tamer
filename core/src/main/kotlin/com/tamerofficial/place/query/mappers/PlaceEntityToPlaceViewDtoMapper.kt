@@ -6,16 +6,17 @@ import com.tamerofficial.place.query.dto.Address
 import com.tamerofficial.place.query.dto.Area
 import com.tamerofficial.place.query.dto.PlaceViewDto
 import com.tamerofficial.place.query.dto.SubArea
+import java.math.BigDecimal
 
 object PlaceEntityToPlaceViewDtoMapper {
     fun PlaceEntity.toDto() : PlaceViewDto {
         return PlaceViewDto(
             placeId= this.placeId!!,
-            name = this.name,
-            address = Address(this.address1,this.address2),
+            name = this.name?: "" ,
+            address = Address(this.address1?: "",this.address2?: ""),
             area = Area(areaId = 0L, name = ""),
-            subArea = SubArea(subAreaId = this.subAreaId, name = this.subAreaName),
-            location = Location(lat = this.lat, lon = this.lon)
+            subArea = SubArea(subAreaId = this.subAreaId?: 0, name = ""),
+            location = Location(lat = this.lat?: BigDecimal(0), lon = this.lon?: BigDecimal(0))
         )
     }
 }

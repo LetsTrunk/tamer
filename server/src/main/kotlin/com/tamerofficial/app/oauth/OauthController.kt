@@ -1,16 +1,7 @@
 package com.tamerofficial.app.oauth
 
 import com.tamerofficial.common.Log
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.ResponseEntity
-import org.springframework.security.core.annotation.AuthenticationPrincipal
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClient
-import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient
-import org.springframework.security.oauth2.core.user.OAuth2User
 import org.springframework.stereotype.Controller
-import org.springframework.ui.Model
-import org.springframework.web.bind.annotation.*
-import org.springframework.web.reactive.function.client.WebClient
 
 
 // 1. 사용자가 접근
@@ -142,19 +133,19 @@ class OauthController {
 
 //    @GetMapping("/apple")
 
-    @GetMapping("/api")
-    @ResponseBody
-    suspend fun afterLogin(
-        @RegisteredOAuth2AuthorizedClient authorizedClient: OAuth2AuthorizedClient,
-        @AuthenticationPrincipal oAuth2User: OAuth2User,
-        model: Model
-    ): ResponseEntity<Any> {
-
-        val result: MutableMap<String, Any>? = oAuth2User.attributes
-
-        return ResponseEntity.ok(result)
-
-    }
+//    @GetMapping("/api")
+//    @ResponseBody
+//    suspend fun afterLogin(
+//        @RegisteredOAuth2AuthorizedClient authorizedClient: OAuth2AuthorizedClient,
+//        @AuthenticationPrincipal oAuth2User: OAuth2User,
+//        model: Model
+//    ): ResponseEntity<Any> {
+//
+//        val result: MutableMap<String, Any>? = oAuth2User.attributes
+//
+//        return ResponseEntity.ok(result)
+//
+//    }
 
 
 

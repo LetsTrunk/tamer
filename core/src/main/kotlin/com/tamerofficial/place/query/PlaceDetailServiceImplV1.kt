@@ -6,20 +6,19 @@ import com.tamerofficial.place.query.dto.PlaceViewDto
 import com.tamerofficial.place.query.interfaces.PlaceDetailService
 import com.tamerofficial.place.query.mappers.PlaceEntityToPlaceViewDtoMapper.toDto
 import org.springframework.stereotype.Service
-import reactor.core.publisher.Mono
 
 @Service
 class PlaceDetailServiceImplV1(
-//    private val placesDetailViewRepository: PlacesDetailViewRepository,
-//    private val placeRepository: PlaceRepository
+    private val placesDetailViewRepository: PlacesDetailViewRepository,
+    private val placeRepository: PlaceRepository
     //리뷰 repo 추가 할 것
 ) : PlaceDetailService {
 
-    override suspend fun searchPlaceDetail(placeId: Long): Mono<PlaceViewDto> {
-        TODO("Not yet implemented")
+    override fun searchPlaceDetail(placeId: Long): PlaceViewDto {
+        return placeRepository.findById(placeId).get().toDto()
     }
 
-    override suspend fun addPlaceDetailViewCount(placeId: Long): Mono<Void> {
+    override fun addPlaceDetailViewCount(placeId: Long){
         TODO("Not yet implemented")
     }
 }

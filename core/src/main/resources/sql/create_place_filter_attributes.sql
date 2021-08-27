@@ -19,8 +19,8 @@ CREATE TABLE places(
 
     score BIGINT DEFAULT 0,
 
-    createdAt DATETIME NOT NULL DEFAULT NOW(),
-    updatedAt DATETIME NOT NULL DEFAULT NOW(),
+    created_at DATETIME NOT NULL DEFAULT NOW(),
+    updated_at DATETIME NOT NULL DEFAULT NOW(),
     PRIMARY KEY (place_id)
 )
 
